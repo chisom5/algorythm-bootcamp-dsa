@@ -36,7 +36,7 @@ The goal is instinct. By the end of the program, when you see a problem you'll r
   - Goals: Analyze runtimes, implement binary search, use hashmaps for counting/lookup problems
 
 - Week 02 — Recursion
-  - Topics: Recursive thinking, recursion vs iteration, backtracking basics, recursion depth and memoization
+  - Topics: Recursive thinking, recursion vs iteration, recursion depth and memoization
   - Goals: Solve recursive problems on the week assignment, implement backtracking templates, apply memoization to optimize
 
 - Week 03 — Linked List

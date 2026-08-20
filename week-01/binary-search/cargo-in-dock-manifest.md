@@ -30,8 +30,8 @@ Binary search.
 
 ### Complexity
 
-Time - O(logN)
-Space - O(1)
+- Time - O(logN)
+- Space - O(1)
 
 ### Steps 
 1. get the left and right of the list. is what i will use as a range in my iteration.

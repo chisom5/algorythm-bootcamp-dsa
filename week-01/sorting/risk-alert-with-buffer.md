@@ -32,8 +32,8 @@ Greedy pattern - because we never revist an allocation or change past decision.
 
 ### Complexity 
 
-Time - O(NlogN + MlogM)
-Space - O(1)
+- Time - O(NlogN + MlogM)
+- Space - O(1)
 
 ### Steps
 1. sort both arrays

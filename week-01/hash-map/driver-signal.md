@@ -31,8 +31,8 @@ Hash map
 
 ### Complexity 
 
-Time - O(n)
-Space - O(n)
+- Time - O(n)
+- Space - O(n)
 
 ### Steps
 1. have a hash set to store unique items.

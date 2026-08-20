@@ -31,8 +31,8 @@ Hash map
 
 ### Complexity 
 
-Time - O(n)
-Space - O(1)
+- Time - O(n)
+- Space - O(1)
 
 ### Steps
 1. iterate the routes while keeping one current frontrunner and a balance score or count,

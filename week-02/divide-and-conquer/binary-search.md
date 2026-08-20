@@ -18,5 +18,5 @@ Divide and conquer -  From reading the question and knowing that the book dictio
 
 #### Complexity
 
-Time - O(logN)
-space - O(logN)
+- Time - O(logN)
+- space - O(logN)
