@@ -21,20 +21,20 @@ routes = [7, 3, 7] → 7
 
 ## Approach plan.
 
-# Key constraint
+### Key constraint
 
 The key constraint is "A dominant destination exists and appears more than floor(len(routes) / 2) times" because it guarantee us that such a dominant destination always exists. without this constraint I might be thinking of using other data structure.
 
-# Pattern
+### Pattern
 
 Hash map
 
-# Complexity 
+### Complexity 
 
 Time - O(n)
 Space - O(1)
 
-# Steps
+### Steps
 1. iterate the routes while keeping one current frontrunner and a balance score or count,
 2. letting matching entries strengthen it (increases the count or score) and 
 3. conflicting entries cancel or decreases the count or score until the true dominant remains.

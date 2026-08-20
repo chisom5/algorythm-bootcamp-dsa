@@ -20,20 +20,20 @@ manifest_codes = [4, 11, 18, 26, 39, 57], requested_code = 39  -> return index 4
 
 ## Approach plan.
 
-# key constraint
+### key constraint
 
 my key constraint is "manifest_codes is sorted in strictly increasing order". because it makes me think in the line of using binary search if the list is sorted and i have a target to search for instead of comparing each item one after the one, i can halve the list and check if the requested_code is the middle value or check left and right section. 
 
-# Pattern
+### Pattern
 
 Binary search.
 
-# Complexity
+### Complexity
 
-Time - O(logn)
+Time - O(logN)
 Space - O(1)
 
-# Steps 
+### Steps 
 1. get the left and right of the list. is what i will use as a range in my iteration.
 2. iterate with the condition while(left <= right)
 3. get the middle value using Math.floor(l + (r -l) /2)

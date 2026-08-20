@@ -20,3 +20,25 @@ Every recursion has a base case (i.e a stopping condition) and a recursive call 
 - divide & conquer
 - backtracking
 - depth.
+
+##### General process in recursion.
+
+1. Base case - what's the smallest or simplest input where i already know the answer with no computation at all.
+2. Recursive case - How can I express the answer in terms of the answer to a strictly smaller version of the same problem?
+3. Shrinking check - Does every recursive call move toward the base case?
+4. Combine step - What do i do with the answer from the recursive call?
+
+###### When Recursion is a better choice.
+
+If recursion only did what a loop already does, there would be little reason to use it. because the loop is simpler and with 
+O(1) space which beats O(n) space. 
+Recursion is worth its cost when the data itself is nested or self-similar, so that "the rest of the problem" looks like a smaller copy of the whole problem.
+
+- Divide and conquer 
+(binary search, merge sort) Each step shrinks the problem by a factor rather than by one element, which is where O(log n) comes from.
+
+- Try everything, then back out.
+Permutations, combinations, maze solving and Sudoku: explore a branch, undo it, try the next.
+
+- Already-recursive definitions
+When the definition of the problem hands you the structure.

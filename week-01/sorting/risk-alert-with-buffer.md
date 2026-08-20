@@ -22,20 +22,20 @@ risk_alerts = [8, 3, 5], reserve_blocks = [4, 6] → 2
 
 ## Approach plan.
 
-# Key constraint 
+### Key constraint 
 the key constraint is "1 <= risk_alerts.length <= 3 * 10^4" and "0 <= reserve_blocks.length <= 3 * 10^4" because it tells
 us that the input can be as large as 3 * 10^4 and that our reserve_block can be empty so our alogrithm should account for it.
 
-# Pattern
+### Pattern
 
 Greedy pattern - because we never revist an allocation or change past decision.
 
-# Complexity 
+### Complexity 
 
-Time - O(nlogn + mlogm)
+Time - O(NlogN + MlogM)
 Space - O(1)
 
-# Steps
+### Steps
 1. sort both arrays
 2. match the items or compare each item if there is a match increment count
 4. adjust the two pointers in the array.
