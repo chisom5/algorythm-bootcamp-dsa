@@ -27,11 +27,11 @@ Although divisible by three once, the remaining count does not stay on the appro
 #### Follow up
 Can you verify the pack size without using loops or recursion?
 
-## Approach plan
+## Approach Plan
 
-### Key constraint
+### Key Constraint
 
-The constraint that matter most is "sample is an integer in the range [-2^31, 2^31 - 1]". it tells us to the input highest range is 
+The constraint that matter most is "sample is an integer in the range [-2^31, 2^31 - 1]". it tells me that the input highest range is 
 a standard 32-bit. with this we can precalculate the largest power of 3. that fit into the 32-bit signed integer.
 And from this thinking we can bypass using recursion or loops. so our solution can account for the follow-up question.
 

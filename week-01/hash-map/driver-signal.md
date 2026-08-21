@@ -19,11 +19,11 @@ driver_signals = [42, 87, 13, 42] → True
 driver_signals = [8, 15, 23, 91] → False
 
 
-## Approach plan.
+## Approach Plan.
 
-### Key constraint
+### Key Constraint
 
-the constraint that matter most is "1 <= driver_signals.length <= 10^5". it tells us our input size can be as large as 10^5 which is 100,000 and using nested loop where you iterate, get one value and iterate on the rest to know if it is unique will result to O(n^2).
+the constraint that matter most is "1 <= driver_signals.length <= 10^5". it tells me that the input size can be as large as 10^5 which is 100,000 and using nested loop where you iterate, get one value and iterate on the rest to know if it is unique will result to O(n^2).
 
 ### Pattern
 

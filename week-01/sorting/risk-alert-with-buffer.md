@@ -20,11 +20,11 @@ risk_alerts = [3, 6], reserve_blocks = [3, 6, 9] → 2
 
 risk_alerts = [8, 3, 5], reserve_blocks = [4, 6] → 2
 
-## Approach plan.
+## Approach Plan.
 
-### Key constraint 
+### Key Constraint 
 the key constraint is "1 <= risk_alerts.length <= 3 * 10^4" and "0 <= reserve_blocks.length <= 3 * 10^4" because it tells
-us that the input can be as large as 3 * 10^4 and that our reserve_block can be empty so our alogrithm should account for it.
+me that the input can be as large as 3 * 10^4 and that our reserve_block can be empty so our alogrithm should account for it.
 
 ### Pattern
 

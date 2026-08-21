@@ -18,9 +18,9 @@ constraints:
 manifest_codes = [4, 11, 18, 26, 39, 57], requested_code = 39  -> return index 4
 
 
-## Approach plan.
+## Approach Plan.
 
-### key constraint
+### key Constraint
 
 my key constraint is "manifest_codes is sorted in strictly increasing order". because it makes me think in the line of using binary search if the list is sorted and i have a target to search for instead of comparing each item one after the one, i can halve the list and check if the requested_code is the middle value or check left and right section. 
 

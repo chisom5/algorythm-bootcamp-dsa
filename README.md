@@ -32,7 +32,7 @@ The goal is instinct. By the end of the program, when you see a problem you'll r
 ## Week Details (first 4 weeks)
 
 - Week 01 — Big O, Binary Search & Hashmap
-  - Topics: Time/space complexity, best/avg/worst cases, binary search implementation and variants, hashmap fundamentals 
+  - Topics: Time/space complexity, best/avg/worst cases, binary search implementation and variants, hashmap fundamentals
   - Goals: Analyze runtimes, implement binary search, use hashmaps for counting/lookup problems
 
 - Week 02 — Recursion
@@ -41,7 +41,7 @@ The goal is instinct. By the end of the program, when you see a problem you'll r
 
 - Week 03 — Linked List
   - Topics: Singly/doubly linked lists, pointers/references, common operations (insert, delete, reverse), cycle detection
-  - Goals: Implement linked list operations, solve pointer manipulation problems, detect and handle cycles
+  - Goals: Explain how a linked list stores data, and why that differs from an array, Trace the pointer state through any operation, step by step, Read traversal, insertion, deletion and search code and say what each line does to the arrows. etc.
 
 - Week 04 — Stack & Queue
   - Topics: LIFO vs FIFO, stack/queue implementations, use-cases (expression evaluation, sliding window), deque and monotonic structures
@@ -49,5 +49,4 @@ The goal is instinct. By the end of the program, when you see a problem you'll r
 
 ## Resources
 
-- Synapse: AI tutor, language: JavaScript 
-
+- Synapse: AI tutor, language: JavaScript

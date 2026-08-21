@@ -33,13 +33,13 @@ A halving effect applied over three matches keeps reducing the result by the sam
 
 Can you compute the final multiplier without repeating the same multiplication once per match in the streak?
 
-## Approach plan.
+## Approach Plan.
 
 use recursive exponentiation by squaring. so instead of multiplying by itself naively that will result to O(N). 
 and the power can be as large as 2^31, so repeatedly multiplying each once will eventually exceed limit.
 we halve the exponent each step and square the base. that gives us O(logN) time
 
-### Key constraint
+### Key Constraint
 
 The constraint that matter most is "-2^31 <= streak_count <= 2^31 - 1". because it forces a negative exponential handling
 and since the input can be this large having our native exponential time complexity O(2^n) will make the algorithm slow. 

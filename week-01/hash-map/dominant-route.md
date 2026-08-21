@@ -19,11 +19,11 @@ routes = [14] → 14
 
 routes = [7, 3, 7] → 7
 
-## Approach plan.
+## Approach Plan.
 
-### Key constraint
+### Key Constraint
 
-The key constraint is "A dominant destination exists and appears more than floor(len(routes) / 2) times" because it guarantee us that such a dominant destination always exists. without this constraint I might be thinking of using other data structure.
+The key constraint is "A dominant destination exists and appears more than floor(len(routes) / 2) times" because it guarantee that such a dominant destination always exists. without this constraint I might be thinking of using other data structure.
 
 ### Pattern
 

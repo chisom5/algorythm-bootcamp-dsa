@@ -16,7 +16,7 @@ Time complexity tells you how the number of steps in your algorithm grows with i
 Space complexity - is how much memory your alogrithm needs to run.
 space complexity = input space + extra spaces. (any extra space variable, data structure or recursive call).
 
-# Different Time complexity.
+## Different Time complexity.
 
 - Constant time O(1) - Fixed time, mean it performs a fixed number of operations. here the time doesn't depend on the input size even when double.
   e.g Touching a fixed number of elements.
@@ -44,7 +44,7 @@ O(n^2) also two nested for loop doesn't automatically mean time complexity is O(
 
 - other time complexity such as factorial time O(n!), exponential time O(2^n) etc.
 
-# Different Space complexity
+## Different Space complexity
 
 - Constant space O(1) - Means a fixed amount of memory regardless of the input size. - here no additional amount of memory is allocated that grows with the input.
   e.g given an input = [7, 12, 8, 7, 4] n = 5 then we iterate to log out the element.

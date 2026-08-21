@@ -29,13 +29,13 @@ Constraints
 
 Could you use memoization to avoid recomputing subexpressions that appear more than once in the recursion tree?
 
-## Approach plan.
+## Approach Plan.
 
 To avoid recomputing subexpressions that appear more than once in the recursion tree. I would be storing each value in a cache.
 
-### Key constraint
+### Key Constraint
 
-The constraint that matter most is "Return every possible result from every valid parenthesization of the expression." because it tells us we can't compute the expression only once.
+The constraint that matter most is "Return every possible result from every valid parenthesization of the expression." because it tells me I can't compute the expression only once.
 
 ### Pattern 
 

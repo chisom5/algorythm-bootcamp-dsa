@@ -27,11 +27,11 @@ Two samples can come from one clean split of a single starting vial.
 #### Follow-up 
 Can you determine this without repeatedly halving the batch count?
 
-## Approach plan
+## Approach Plan
 
-### Key constraint
+### Key Constraint
 
-The constraint that matter most is "A valid batch size is a positive integer that can be repeatedly divided by 2 until it reaches exactly 1; at every step before 1, it must be even." This tells us how we can approach the problem by using recursion to repeatedly divide by 2 until a condition met.
+The constraint that matter most is "A valid batch size is a positive integer that can be repeatedly divided by 2 until it reaches exactly 1; at every step before 1, it must be even." This tells me how i can approach the problem by using recursion to repeatedly divide by 2 until a condition met.
 
 ### Pattern 
 

@@ -10,7 +10,7 @@ index.
 book = ["Adeyemi", "Baptiste", "Chen", "Escobar", "Garcia", "Haddad", "Kowalski",
 "Larsen", "Mike", "Nwafor", "Okafor"] name = "Nwafor"
 
-## Approach plan
+## Approach Plan
 
 ### Pattern 
 
