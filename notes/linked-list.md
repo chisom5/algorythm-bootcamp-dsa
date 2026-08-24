@@ -66,20 +66,20 @@ If yes - dummy node is needed.
 - Can the head change because of insertion or merging?
 If yes - consider using dummy node.
 
-Here are some algorithmic patterns used to solve linked list problems:
+### Here are some algorithmic patterns used to solve linked list problems:
 
-- Two pointers (Fast & Slow):
+1. Two pointers (Fast & Slow):
 
 Initialize two pointers starting at the head: a slow pointer that moves 1 step at a time, and a fast pointer that moves 2 steps at a time.
 
-- Offset pointers: 
+2.  Offset pointers: 
 
 Instead of moving at different speeds, advance the fast pointer $K$ steps ahead before starting the slow pointer. Then, move both at the same speed ($1$ step at a time).
 
-- Skip-flip Advance (In-place reversal): 
+3. Skip-flip Advance (In-place reversal): 
 
 Manipulating pointer references dynamically using three variables: prev, curr, and next.
 
-- Dummy Head Node: 
+4. Dummy Head Node: 
 
 Create a fake node (const dummy = new ListNode(0)) to serve as a fixed starting reference before the actual head.

@@ -34,7 +34,7 @@ N.B - Most problem in Stack & Queue Keep returning to
 
 ### Stack Patterns
 
-1. Monotonic Stack 
+1. Monotonic Stack
 
 A monotonic stack turns a family of O(n²) problems into O(n) problems. It is the highest-value stack pattern.
 
@@ -66,22 +66,107 @@ the new element is the answer for that entry. And this algorithm runs in O(N)
 
 If the answer involves a distance or a position, such as "how many days until" or "the width of the rectangle", a stored value does not carry the information you need. Store the index instead.
 
-2. Pairing & Symbol Matching  
+2. The nested-structure family
+
+Is the umbrella term for any stack pattern where the inner items must be completely resolved before outer
+Items can finish processing. The last structure open is always the first structure closed.
+
+The key pattern in this family are :
+
+- Pairing & Symbol Matching
 
 #### The Algorithm Shape
 
 - Scan left to right, pushing opening symbols ((, {, [) on the stack
 
-- When encountering a closing symbols (),}, ]), check if the top of the stack matches 
-the corresponding opening symbols, then pop. At the end of input the stack must be empty.
+- When encountering a closing symbols (),}, ]), check if the top of the stack matches
+  the corresponding opening symbols, then pop. At the end of input the stack must be empty.
 
 #### When to use
 
 - Validating syntax, matching nested structures, or evaluating expression closures.
 
+- Nested string Decoding "3[a2[c]]" → "accaccacc" (String Manipulation & Parsing). The mechanism is when encountering an opening indicator like [ in "3[a2[c]]"
+  push the repeat count and the string built so far. At ], we pop them and combine them.
 
-3. The nested-structure family
+```js
+function decodeString(s) {
+  let stack = [];
+  let currentNum = 0;
+  let currentStr = "";
 
-Is the umbrella term for any stack pattern where the inner items must be completely resolved before outer 
-Items can finish processing. The last structure open is always the first structure closed.
+  for (let char of s) {
+    if (!isNaN(char)) {
+      // Build numbers (handles multi-digit like '12')
+      currentNum = currentNum * 10 + Number(char);
+    } else if (char === "[") {
+      // 1. Push outer state onto stack
+      stack.push([currentStr, currentNum]);
+      // 2. Reset local buffers for the inner scope
+      currentStr = "";
+      currentNum = 0;
+    } else if (char === "]") {
+      // 1. Pop saved outer state
+      let [prevStr, num] = stack.pop();
+      // 2. Expand inner string and attach to saved outer string
+      currentStr = prevStr + currentStr.repeat(num);
+    } else {
+      // Standard letters
+      currentStr += char;
+    }
+  }
 
+  return currentStr;
+}
+```
+
+- Nested Expression Evaluation with Parentheses (Expression Evaluation & Parsing) - like a basic calculator. The mechanism At ( push the running result and the current sign onto the stack and reset the local tally. when ) is hit, restore them and combine the sub-result.
+
+given a string expression 1 + (4 + 5 \* 2).
+
+```js
+function calculate(s) {
+  let stack = [];
+  let runningResult = 0;
+  let currentNum = 0;
+  let currentSign = 1; // 1 for +, -1 for -
+
+  for (let char of s) {
+    if (!isNaN(char) && char !== " ") {
+      currentNum = currentNum * 10 + Number(char);
+    } else if (char === "+") {
+      runningResult += currentSign * currentNum;
+      currentNum = 0;
+      currentSign = 1;
+    } else if (char === "-") {
+      runningResult += currentSign * currentNum;
+      currentNum = 0;
+      currentSign = -1;
+    } else if (char === "(") {
+      stack.push([runningResult, currentSign]);
+      runningResult = 0;
+      currentSign = 1;
+    } else if (char === ")") {
+      runningResult += currentSign * currentNum;
+      currentNum = 0;
+
+      let [prevResult, prevSign] = stack.pop();
+      runningResult = prevResult + prevSign * runningResult;
+    }
+  }
+  return runningResult + currentSign * currentNum;
+}
+```
+
+### Queue
+A Queue is a line, you join at the back(rear) and leave from the front. The item that was added first is removed first. This order is called first-in, first-out (FIFO), and sometimes LILO, last-in, last-out.
+
+A queue track two pointers instead of one. and it is the only structural difference from stack. When queue code is wrong, the fastest diagnostic question is: which pointer moved, and should it have moved?.
+
+* The obvious array queue is broken.
+
+In a list, append to enqueue. i.e push an item to the queue. and shift() to dequeue. The code is correct but shift() runs in O(n) time. Removing the first element of a contiguous array means shifting every remaining element one slot to the left.
+
+Contiguity is the reason array[5000] is a constant-time lookup, and a contiguous block cannot contain a hole.
+
+So draining a queue of n items costs O(n²) time. That is acceptable for ten items and far too slow for a hundred thousand.
