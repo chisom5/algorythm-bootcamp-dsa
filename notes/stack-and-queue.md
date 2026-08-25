@@ -159,14 +159,61 @@ function calculate(s) {
 ```
 
 ### Queue
+
 A Queue is a line, you join at the back(rear) and leave from the front. The item that was added first is removed first. This order is called first-in, first-out (FIFO), and sometimes LILO, last-in, last-out.
 
 A queue track two pointers instead of one. and it is the only structural difference from stack. When queue code is wrong, the fastest diagnostic question is: which pointer moved, and should it have moved?.
 
-* The obvious array queue is broken.
+- The obvious array queue is broken.
+  - Attempt 1: a list, append to enqueue. i.e push an item to the queue. and shift() to dequeue. The code is correct but shift() runs in O(n) time. Removing the first element of a contiguous array means shifting every remaining element one slot to the left.
 
-In a list, append to enqueue. i.e push an item to the queue. and shift() to dequeue. The code is correct but shift() runs in O(n) time. Removing the first element of a contiguous array means shifting every remaining element one slot to the left.
+  Contiguity is the reason array[5000] is a constant-time lookup, and a contiguous block cannot contain a hole.
 
-Contiguity is the reason array[5000] is a constant-time lookup, and a contiguous block cannot contain a hole.
+  So draining a queue of n items costs O(n²) time. That is acceptable for ten items and far too slow for a hundred thousand.
+  - Attemp 2: do not shift, and advance a front index instead.
 
-So draining a queue of n items costs O(n²) time. That is acceptable for ten items and far too slow for a hundred thousand.
+  Here to perform dequeue, we advance the front index and those slot, before the advance front will never be use again. And dequeue runs in O(1) time. However, the abandoned slots at the front are never reused, so the array grows without limit. A long-running server queue that processes a million messages leaves a million unused slots behind it. This behavior is a memory leak.
+
+The fix for building this queue will be to use Circular array/buffer - where you wrap indices around using modulo arithmetric
+((index + 1) % CAPACITY).
+
+- The Circular array queue
+
+```js
+class CircularQueue {
+  constructor(capacity) {
+    this.data = new Array(capacity).fill(null);
+    this.cap = capacity;
+    this.front = 0;
+
+    // tells empty from full
+    this.size = 0;
+  }
+
+  //  implementation
+  enqueue(x) {
+    if (this.size === this.cap) {
+      return false;
+    }
+
+    const slot = (this.font + this.size) % this.cap;
+    this.data[slot] = x;
+    slot += 1;
+    return true;
+  }
+
+  dequeue(){
+    if(this.size === 0){
+        // nothing to dequeue.
+        return null;
+    }
+    // get the front item in the data
+    const x = this.data[this.front];
+    this.data[this.front] = null; // set the front item to null
+    this.front = (this.front + 1) % this.cap; // this adjust the front of the array
+
+    this.size -= 1;
+    return x;
+  }
+}
+```

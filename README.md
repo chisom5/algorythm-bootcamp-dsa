@@ -44,8 +44,11 @@ The goal is instinct. By the end of the program, when you see a problem you'll r
   - Goals: Explain how a linked list stores data, and why that differs from an array, Trace the pointer state through any operation, step by step, Read traversal, insertion, deletion and search code and say what each line does to the arrows. etc.
 
 - Week 04 — Stack & Queue
-  - Topics: LIFO vs FIFO, stack/queue implementations, use-cases (expression evaluation, sliding window), deque and monotonic structures
+  - Topics: LIFO vs FIFO, stack/queue implementations, use-cases (expression evaluation, sliding window) and monotonic structures
   - Goals: Implement stacks & queues, apply them to common algorithmic patterns
+
+- Week 05 - Tree
+
 
 ## Resources
 
