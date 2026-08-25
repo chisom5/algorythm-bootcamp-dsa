@@ -48,6 +48,7 @@ The goal is instinct. By the end of the program, when you see a problem you'll r
   - Goals: Implement stacks & queues, apply them to common algorithmic patterns
 
 - Week 05 - Tree
+  - Topics: 
 
 
 ## Resources

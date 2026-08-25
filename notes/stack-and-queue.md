@@ -217,3 +217,12 @@ class CircularQueue {
   }
 }
 ```
+N.B There are 3 things that are call queue but they are not.
+
+- A priority queue is not a queue:
+A priority queue is a heap. It removes the highest-priority item, not the earliest item, and it ignores insertion order. its operation run in O(logN) not O(1). Use it when a problem says "smallest so far", "k largest", or "most urgent".
+
+- A monotonic deque is not a plain queue
+A monotonic deque keeps an ordering invariant on every insertion. It is used to find the maximum or minimum in a sliding window. It is the monotonic stack, plus expiry from the front.
+
+- A message queue is a distributed system, not a data structure.
