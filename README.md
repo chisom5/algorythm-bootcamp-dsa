@@ -47,8 +47,8 @@ The goal is instinct. By the end of the program, when you see a problem you'll r
   - Topics: LIFO vs FIFO, stack/queue implementations, use-cases (expression evaluation, sliding window) and monotonic structures
   - Goals: Implement stacks & queues, apply them to common algorithmic patterns
 
-- Week 05 - Tree
-  - Topics: 
+- Week 05 - Tree I
+  - Topics: Tree, Binary search tree, Tree traversal (Depth-first), Pre-order (root-left-right), Post-order (left-right-root), In-order(left-root-right) 
 
 
 ## Resources
