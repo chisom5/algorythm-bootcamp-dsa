@@ -19,7 +19,7 @@ The goal is instinct. By the end of the program, when you see a problem you'll r
 
 - Understand and analyze algorithmic complexity using Big O
 - Implement and use common data structures (arrays, linked lists, stacks, queues, trees, graphs, hash maps, heaps)
-- Solve problems using recursion, divide & conquer, dynamic programming, and greedy strategies
+- Solve problems using recursion, divide & conquer, dynamic programming, and greedy strategies etc.
 - Prepare for technical interviews with timed practice and mock interviews
 
 ## 12-Week Schedule
@@ -28,6 +28,7 @@ The goal is instinct. By the end of the program, when you see a problem you'll r
 - Week 02 : Recursion
 - Week 03 : Linked List
 - Week 04 : Stack & Queue
+- Week 05 : Tree I
 
 ## Week Details (first 4 weeks)
 
