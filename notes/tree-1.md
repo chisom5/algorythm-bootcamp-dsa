@@ -133,3 +133,17 @@ All three orders are depth-first, all three runs O(n) in time and O(h) space, an
 - For "Post order" - we use it when the current node require result from both children. Examples Height, node count, subtree sum, balance, evaluating an expression
 
 - For "In order" - we use it when the left subtree must be completed before the current node. Examples On a binary search tree, inorder produces the values in sorted order. Used extensively in Trees II
+
+#### To convert a problem into code.
+
+Answer three questions in order for any tree problem.
+
+1. What does this function return for one subtree?
+State this in one sentence, including the return type. e.g "it returns the number of nodes on the longest path in this subtree, as an int." If this sentence cannot be stated, the body of the function cannot be written correctly.
+
+2. What do I need from my children to answer it?
+usually the same value from each child.
+
+3. What does the current node contribute?
+Its value, one level of depth, or one unit of a count. This becomes the combine step.
+
