@@ -124,7 +124,7 @@ function ino(root) {
 
 The prefix in each name indicates the position of the root in the output. Preorder places it first, inorder places it in the middle, and postorder places it last.
 
-All three orders are depth-first, all three runs O(n) in time and O(h) space, and all three call the function on every null reference. 
+All three orders are depth-first, all three runs O(n) in time and O(h) space, and all three call the function on every null reference.
 
 #### When to use any DFS order
 
@@ -139,11 +139,57 @@ All three orders are depth-first, all three runs O(n) in time and O(h) space, an
 Answer three questions in order for any tree problem.
 
 1. What does this function return for one subtree?
-State this in one sentence, including the return type. e.g "it returns the number of nodes on the longest path in this subtree, as an int." If this sentence cannot be stated, the body of the function cannot be written correctly.
+   State this in one sentence, including the return type. e.g "it returns the number of nodes on the longest path in this subtree, as an int." If this sentence cannot be stated, the body of the function cannot be written correctly.
 
 2. What do I need from my children to answer it?
-usually the same value from each child.
+   usually the same value from each child.
 
 3. What does the current node contribute?
-Its value, one level of depth, or one unit of a count. This becomes the combine step.
+   Its value, one level of depth, or one unit of a count. This becomes the combine step.
 
+#### Information Flow
+
+Every tree algorithm moves information in one of two directions.
+
+- Top-down direction: This is the pre-order flow. the node acts first, then hands each child what it still needs · f(node, state) · the answer will then be completes at a leaf. e.g Path sum
+
+- Bottom-up direction: Is the post order flow. children answer first, then the node combines · f(node) · the answer completes at the root
+
+#### Template for Top-down & Bottom-up direction
+
+- Bottom-up
+
+```js
+function solve(root) {
+  // 0, or -1, or true
+  if (!root) return identity;
+
+  // children first
+  const left = solve(root.left);
+  const right = solve(root.right);
+
+  // ← the whole problem
+  return combine(left, right, root.val);
+}
+```
+Examples of problem in bottom-down directions are 
+- Tree height h = 1 + max(l, r), Node count c = 1 + l + r, Tree sum s = root.val + l + r
+
+- Top-down
+
+```js
+function solve(root, target) {
+  // the state is a PARAMETER, so every frame has its own copy
+  if (!root) return false;
+  // this node acts first
+  target -= root.val;
+  // a leaf: path complete
+  if (!root.left && !root.right) {
+    return target === 0;
+  }
+  // hand the rest down
+  return solve(root.left, target) || solve(root.right, target);
+}
+```
+Examples of problem in bottom-down directions are 
+- Path sum, while giving a target.

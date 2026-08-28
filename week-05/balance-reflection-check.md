@@ -38,7 +38,7 @@ they are consider mirror
 
 ### Key Constraint
 
-The constraint that matter most is "The total number of stops across both loot_route_a and loot_route_b is in the range [0, 100]." because it tell me that recursive solution is reasonable as maximum of 100 total nodes guarantees that the tree depth cannot exceed 100. with stack limit around 10,000 frames. (10^4), 100 recursive call will never trigger a maximium call stack exceed.
+The constraint that matter most is "The total number of nodes in the configuration tree is in the range [1, 1000]" because it guarantees safe call stack depth for recursive DFS (O(N) time, O(H) space) and O(N) space for an iterative BFS queue.
 
 ### Pattern
 
