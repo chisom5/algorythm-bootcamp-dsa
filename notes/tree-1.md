@@ -172,13 +172,15 @@ function solve(root) {
   return combine(left, right, root.val);
 }
 ```
-Examples of problem in bottom-down directions are 
-- Tree height h = 1 + max(l, r), Node count c = 1 + l + r, Tree sum s = root.val + l + r
+
+Examples of problem in bottom-down directions are
+
+- Tree height h = 1 + max(l, r), Node count c = 1 + l + r, Tree sum s = root.val + l + r, Balanced b = -1 if either is -1
 
 - Top-down
 
 ```js
-function solve(root, target) {
+function solveSumI(root, target) {
   // the state is a PARAMETER, so every frame has its own copy
   if (!root) return false;
   // this node acts first
@@ -188,8 +190,114 @@ function solve(root, target) {
     return target === 0;
   }
   // hand the rest down
-  return solve(root.left, target) || solve(root.right, target);
+  return solveSumI(root.left, target) || solveSumI(root.right, target);
 }
 ```
-Examples of problem in bottom-down directions are 
-- Path sum, while giving a target.
+
+Examples of problem in bottom-down directions are
+
+- Path sum I, while giving a target. return whelther any root-to-leaf path has a values summing to the target.
+- Path sum II return every root-to-leaf path that sums to the target.
+
+```js
+function solveSumII(root, target, path, out) {
+  if (!root) {
+    return;
+  }
+
+  path.push(root.val);
+  target -= root.val;
+
+  if (!root.left && !root.right && target === 0) {
+    // save a copy
+    out.push([...path]);
+  }
+
+  solveSumII(root.left, target, path, out);
+  solveSumII(root.right, target, path, out);
+
+  path.pop();
+}
+```
+
+#### Symmetric Tree
+
+Return whelther a binary tree is a mirror image of itself. A tree is symmetric or mirror if the left side of the subtree is the same
+as the right side of another subtree. or if the right-side of a sub tree is equal the left-side of another subtree.
+
+```js
+function isSymmetric(root) {
+  if (!root) return true;
+  return isMirror(root.left, root.right);
+}
+
+function isMirror(a, b) {
+  if (!a && !b) return true; // if both subtree are empty.
+  if (!a || !b) return false; // if either subtree are empty.
+
+  return (
+    a.val === b.val &&
+    // outer
+    isMirror(a.left, b.right) &&
+    // inner
+    isMirror(a.right, b.left)
+  );
+}
+```
+
+#### Balanced Binary Tree
+
+A binary tree is height balanced if for every node, the height of its two subtree differ by 1.
+
+- The direct approach will be traverse the tree and call a separate height function
+  on both children at every node.
+
+```js
+function isBalancedNaive(root) {
+  if (!root) {
+    return true;
+  }
+
+  if (Math.abs(height(root.left) - height(root.right)) > 1) return false;
+
+  return isBalancedNaive(root.left) && isBalancedNaive(root.right);
+}
+
+function height(node) {
+  if (!node) return 0;
+
+  return 1 + Math.max(height(node.left), height(node.right));
+}
+```
+
+The implementation will result to O(N^2) because the call at the root traverse the tree, then the call to the height traverse the subtree again.
+
+- To optimize this to run in O(N) where the depth run only once. using −1 as a sentinel.
+
+```js
+function isBalancedTree(root) {
+  return height(root) !== -1;
+}
+
+function height(node) {
+  if (!node) {
+    return 0;
+  }
+
+  let left = height(node.left);
+  if (left === -1) return -1;
+
+  let right = height(node.right);
+  if (right === -1) return -1;
+
+  if (Math.abs(left - right) > 1) return -1;
+
+  return 1 + Math.max(left, right);
+}
+```
+
+The technique is to choose a convention under which an impossible value exists.
+
+#### Diameter of binary Tree
+
+diameter of a binary tree return the length of the longest path between any two nodes in the tree. measure in edges.
