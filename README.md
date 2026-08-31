@@ -54,7 +54,7 @@ The goal is instinct. By the end of the program, when you see a problem you'll r
   - Goals: understand DFS and different order in it, symmetric tree, balanced or stable tree, Path problems (path sum I & II, binary tree path), measure property (max depth, count nodes).
 
 - Week 06 - Tree II
-  - Topics: Breadth first search (BFS)
+  - Topics: Breadth first search (BFS) and level-order traversal, binary search tree, lowest common ancestor, construction and serialization.
 
 
 ## Resources

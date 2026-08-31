@@ -326,3 +326,9 @@ function diameterOfBinaryTree(root) {
 ```
 
 #### General Note or Common errors on tree
+
+
+#### Design Question
+
+A company organization chart contains 50,000 people. The two most frequent queries are "list everyone under this manager" and "list the chain of command above this person". State what each node should store, and which of the two queries your choice makes more expensive.
+
