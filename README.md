@@ -29,6 +29,7 @@ The goal is instinct. By the end of the program, when you see a problem you'll r
 - Week 03 : Linked List
 - Week 04 : Stack & Queue
 - Week 05 : Tree I
+- Week 05 : Tree II
 
 ## Week Details (first 4 weeks)
 
@@ -50,6 +51,10 @@ The goal is instinct. By the end of the program, when you see a problem you'll r
 
 - Week 05 - Tree I
   - Topics: Tree, Binary search tree, Tree traversal (Depth-first), Pre-order (root-left-right), Post-order (left-right-root), In-order(left-root-right) 
+  - Goals: understand DFS and different order in it, symmetric tree, balanced or stable tree, Path problems (path sum I & II, binary tree path), measure property (max depth, count nodes).
+
+- Week 06 - Tree II
+  - Topics: Breadth first search (BFS)
 
 
 ## Resources
