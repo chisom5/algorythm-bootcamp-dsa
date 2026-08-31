@@ -29,7 +29,7 @@ The goal is instinct. By the end of the program, when you see a problem you'll r
 - Week 03 : Linked List
 - Week 04 : Stack & Queue
 - Week 05 : Tree I
-- Week 05 : Tree II
+- Week 06 : Tree II
 
 ## Week Details (first 4 weeks)
 
