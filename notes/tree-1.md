@@ -301,3 +301,28 @@ The technique is to choose a convention under which an impossible value exists.
 #### Diameter of binary Tree
 
 diameter of a binary tree return the length of the longest path between any two nodes in the tree. measure in edges.
+
+This uses the "return one thing, track another"
+
+diameter = best = max(best, l + r + 2). but it return the height of the tree thou that's not the answer.
+```js
+
+function diameterOfBinaryTree(root) {
+  let best = 0;
+
+  function height(node) {
+    if (!node) return -1;
+    const left = height(node.left);
+    const right = height(node.right);
+    // TRACK the answer
+    best = Math.max(best, left + right + 2);
+    // RETURN the height
+    return 1 + Math.max(left, right);
+  }
+
+  height(root);
+  return best;
+}
+```
+
+#### General Note or Common errors on tree

@@ -39,7 +39,7 @@ N.B - Skeweed tree - lost it's branching factor hence it will be degenerate into
 
 they are fine in performance for small input size but becomes slow as the input size grows.
 
-N.B - if we have nested for loop but with different array input then it is O(m \* n) not
+N.B - if we have nested for loop but with different array input then it is O(m * n) not
 O(n^2) also two nested for loop doesn't automatically mean time complexity is O(n^2). what matter is how many times the innermost loop runs. if the inner loop runs in constant time then our algorithm time complexity for such nested for loop is O(n).
 
 - other time complexity such as factorial time O(n!), exponential time O(2^n) etc.
