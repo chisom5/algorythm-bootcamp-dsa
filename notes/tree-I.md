@@ -343,14 +343,14 @@ A company organization chart contains 50,000 people. The two most frequent queri
 
 #### Answer
 
-### Thought
+#### Thought
 
 For an organization chart of 50,000 people. - This is a tree data structure In which I am to evaluate how the data are stored in each node affects the performance of two query.
 
 - list everyone under this manager. i.e a downward query finding all descendant under a manager (subtree traversal)
 - list the chain of command above this person. - is an upward query finding the ancestor above the current person. (path retrival)
 
-### Each node in a tree should store:
+#### Each node in a tree should store:
 
 - data : which can be employee_id, name etc.
 
@@ -358,7 +358,7 @@ For an organization chart of 50,000 people. - This is a tree data structure In w
   - parent: Reference/pointer to the employee's direct manager.
   - children: A list or array of pointers to direct subordinates.
 
-### Query Cost
+#### Query Cost
 
 Parent pointer Design.
 
