@@ -305,8 +305,8 @@ diameter of a binary tree return the length of the longest path between any two 
 This uses the "return one thing, track another"
 
 diameter = best = max(best, l + r + 2). but it return the height of the tree thou that's not the answer.
-```js
 
+```js
 function diameterOfBinaryTree(root) {
   let best = 0;
 
@@ -327,8 +327,74 @@ function diameterOfBinaryTree(root) {
 
 #### General Note or Common errors on tree
 
+- No null base case - wgen there is no empty-tree test case. Write if !root: return … as the first line unless there is a specific reason not to.
+
+- Forgetting to pop when backtracking
+
+- Appending a mutable list instead of a copy
+
+- Comparing traversal output instead of structure - Two different trees can produce the same traversal sequence. If a problem concerns structure, as in same tree, symmetric tree and subtree problems, compare positions using a two-parameter recursion rather than comparing flattened output.
+
+- Assuming the answer passes through the root - The answers to diameter, maximum path sum and deepest imbalance can be located at any node. If the answer can be at any node, it must be accumulated in a variable declared outside the recursion.
 
 #### Design Question
 
-A company organization chart contains 50,000 people. The two most frequent queries are "list everyone under this manager" and "list the chain of command above this person". State what each node should store, and which of the two queries your choice makes more expensive.
+A company organization chart contains 50,000 people. The two most frequent queries are "list everyone under this manager" and "list the chain of command above this person". State what each node should store, and which of the two queries your choice makes more expensive?.
 
+#### Answer
+
+### Thought
+
+For an organization chart of 50,000 people. - This is a tree data structure In which I am to evaluate how the data are stored in each node affects the performance of two query.
+
+- list everyone under this manager. i.e a downward query finding all descendant under a manager (subtree traversal)
+- list the chain of command above this person. - is an upward query finding the ancestor above the current person. (path retrival)
+
+### Each node in a tree should store:
+
+- data : which can be employee_id, name etc.
+
+- pointers:
+  - parent: Reference/pointer to the employee's direct manager.
+  - children: A list or array of pointers to direct subordinates.
+
+### Query Cost
+
+Parent pointer Design.
+
+- The upward query (chain of command) is cheap. it runs in O(H) time, where H is the height of the tree. you start at the employee node and follow parent pointer upward to the root. so every employee node has exactly one parent, Because there are no branches to explore. only a single straight path straight up to the top - here w use a simple while loop following parent pointers.
+
+```js
+function getChainOfCommand(employeeNode) {
+  const chain = [];
+  let current = employeeNode;
+
+  // Keep moving straight up until reaching the CEO (whose parent is null)
+  while (current !== null) {
+    chain.push(current.name);
+    current = current.parent;
+  }
+
+  return chain;
+}
+```
+
+- The downward query (descendant or subordinate) is expensive. it run in O(K) time. where K is the size of the subtree. we must perform a depth-first search (DFS) or breadth-first search (BFS) traversing all direct and indirect children nodes to collect the list.
+
+```js
+
+function getAllSubordinates(managerNode) {
+    const subordinates = [];
+
+    // Auxiliary DFS function to visit all branches
+    function dfs(node) {
+        for (const child of node.children) {
+            subordinates.push(child.name);
+            dfs(child); // Branching down into sub-departments
+        }
+    }
+
+    dfs(managerNode);
+    return subordinates;
+}
+```
