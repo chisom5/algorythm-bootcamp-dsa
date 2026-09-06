@@ -96,7 +96,7 @@ function levelOrder(root) {
     let levelSize = queue.length;
     let level = [];
 
-    for (let i = 0; i < length; i++) {
+    for (let i = 0; i < levelSize; i++) {
       let node = queue.shift();
       level.push(node);
 
