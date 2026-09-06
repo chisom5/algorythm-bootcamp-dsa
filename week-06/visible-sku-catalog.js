@@ -1,14 +1,14 @@
 /**
  * @param {TreeNode | null} root
- * @returns {number}
+ * @returns {number[]}
  */
-function minDepth(root) {
+function rightSideView(root) {
   if (!root) {
-    return 0;
+    return [];
   }
 
   let queue = [root];
-  let depth = 1;
+  let result = [];
 
   while (queue.length) {
     let levelSize = queue.length;
@@ -16,16 +16,14 @@ function minDepth(root) {
     for (let i = 0; i < levelSize; i++) {
       let node = queue.shift();
 
-      // early return 
-      if (!node.left && !node.right) {
-        return depth;
+      if (i === levelSize - 1) {
+        result.push(node.val);
       }
 
       if (node.left) queue.push(node.left);
       if (node.right) queue.push(node.right);
     }
-    depth++;
   }
 
-  return depth;
+  return result;
 }

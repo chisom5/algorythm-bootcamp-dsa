@@ -158,15 +158,236 @@ while (queue.length) {
   // C: commit the level result
 }
 ```
+
 | Problem | What changes |
 | level order | A: level = [] · B: level.append(val) · C: result.append(level) |
 | Right side view | B: if i === level_size - 1: result.append(val) |
 | Left side view | B: if i === 0: result.append(val) |
-| Largest value per leve |  A: best = -inf · B: best = max(best, val) · C: append best |
-| Average of levels | A: total = 0 · B: total += val · C: append total / level_size  |
-| Level sum |  A: total = 0 · B: total += val · C: append total. |
-| Minimum depth |  B: if leaf: return depth |
-|  Maximum depth | Count the outer iterations. Nothing else. |
-| Zigzag | C: reverse level on odd levels  |
-| Bottom-up level  |  C: append as usual, then return result reverse array. |
-| Count node per level |  C: result.append(level_size). |
+| Largest value per leve | A: best = -inf · B: best = max(best, val) · C: append best |
+| Average of levels | A: total = 0 · B: total += val · C: append total / level_size |
+| Level sum | A: total = 0 · B: total += val · C: append total. |
+| Minimum depth | B: if leaf: return depth |
+| Maximum depth | Count the outer iterations. Nothing else. |
+| Zigzag | C: reverse level on odd levels |
+| Bottom-up level | C: append as usual, then return result reverse array. |
+| Count node per level | C: result.append(level_size). |
+
+#### Zigzag level order
+
+Problem: Given the root of a binary tree, return the zigzag level order traversal of its nodes' values. (i.e., from left to right, then right to left for the next level and alternate between).
+
+Solution:
+
+One approach is to reverse the traversal using a flag. "leftToRight"
+
+```js
+function zigzagLevelOrder(root) {
+  if (!root) {
+    return [];
+  }
+
+  const result = [];
+  const queue = [root];
+  const leftToRight = true;
+
+  while (queue.length) {
+    let levelSize = queue.length;
+    let level = [];
+
+    for (let i = 0; i < levelSize; i++) {
+      let node = queue.shift();
+
+      level.push(node.val);
+
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+    }
+
+    if (!leftToRight) {
+      level.reverse();
+    }
+    result.push(level);
+
+    leftToRight = !leftToRight;
+  }
+
+  return result;
+}
+```
+
+- The other approach will be using the deque method. i.e depending on the flag append to the end or prepend to the front.
+
+```js
+while (queue.length) {
+  let levelSize = queue.length;
+  let level = [];
+
+  for (let i = 0; i < levelSize; i++) {
+    let node = queue.shift();
+
+    if (leftToRight) {
+      level.push(node.val);
+    } else {
+      level.unshift(node.val);
+    }
+
+    if (node.left) queue.push(node.left);
+    if (node.right) queue.push(node.right);
+  }
+
+  result.push(level);
+
+  leftToRight = !leftToRight;
+}
+```
+
+#### Choosing a traversal
+
+Choosing a traversal for a tree problem, if the quesiton has the following signal word
+
+- "level", "each row", "top to bottom" - BFS with level template
+
+- "minimum depth", "shallowest", "nearest", "first" - BFS with an early return.
+
+- "right side view", "average of levels" - BFS with level template
+
+- "A very deep tree and stack overflow is a risk" - BFS
+
+- "path from root to leaf" - DFS
+
+- "maximum depth", "diameter", "balanced", "symmetry" - DFS
+
+- "does a subtree satisfy X" - DFS
+
+- A very wide tree and memory is a constraint - DFS
+
+### Binary Search Tree (BST)
+
+A binary search tree adds one rule about where values are allowed to live. And that single rule turns search into O(h), which is O(log n) on a balanced tree.
+
+#### The problem a BST solves
+
+We already know that array and linked list are good at one thing and bad at the other. A Binary search tree store the ordering in the STRUCTURE instead of in memory positions.
+
+search O(h) · insert O(h) · delete O(h) — one comparison discards an entire subtree
+
+#### BST property
+
+For every node n in the tree:
+
+1. All values in the left subtree of n are less than n.val.
+
+2. All values in the right subtree of n are greater than n.val.
+
+3. Both subtrees are themselves valid binary search trees.
+
+Problem: given a binary tree of an ordered list, return the value where it matches the target.
+
+```js
+function searchBST(root, target) {
+  let node = root;
+  // stop when we fall off the tree
+  while (node) {
+    if (target === node.val) {
+      // found it
+      return node;
+    } else if (target < node.val) {
+      // discard the whole RIGHT subtree
+      node = node.left;
+    } else {
+      // discard the whole LEFT subtree
+      node = node.right;
+    }
+  }
+  // fell off: not present
+  return null;
+}
+```
+
+N.B - there are two version to this. we have the iterative one that uses O(1) space and the recursive.
+
+```js
+// the recursive version · same logic, O(h) stack space
+function searchBST(root, target) {
+  if (!root || root.val === target) return root;
+  if (target < root.val) return searchBST(root.left, target);
+  return searchBST(root.right, target);
+}
+```
+
+#### Operations in BST
+
+Every one of these operations on a BST costs O(h):
+
+- search
+- insert
+- find min
+- find max
+- successor
+- predecessor
+
+where h - can be (log n). O(log n ) only when the tree is balanced.
+
+#### Inserting in BST
+
+Insert reuses the search template. Search for the value; it is not there, so you fall off the bottom of the tree; attach the new node exactly where you fell off.
+
+```js
+function insertIntoBST(root, val) {
+  // empty tree
+  if (!root) {
+    // it becomes the root
+    return new TreeNode(val);
+  }
+
+  let node = root;
+  while (true) {
+    // belongs on the left
+    if (val < node.val) {
+      // empty slot found
+      if (!node.left) {
+        // attach and stop
+        node.left = new TreeNode(val);
+        return root;
+      }
+      // keep descending
+      node = node.left;
+      // belongs on the right
+    } else {
+      if (!node.right) {
+        node.right = new TreeNode(val);
+        return root;
+      }
+      node = node.right;
+    }
+  }
+}
+```
+#### Inorder traversal 
+
+Inorder says: visit everything smaller than me, then me, then everything larger than me. 
+
+The recursive version - going left, visiting self, going right.
+
+```js
+
+function inorder(root) {
+  const result = [];
+
+  function walk(node) {
+    // base case
+    if (!node) {
+      return;
+    }
+    // everything smaller
+    walk(node.left);
+    // then me
+    result.push(node.val);
+    // then everything larger
+    walk(node.right);
+  }
+  
+  walk(root);
+  return result;
+}
+```

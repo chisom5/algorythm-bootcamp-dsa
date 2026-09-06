@@ -26,7 +26,7 @@ The problem ask to "return its minimum depth to the nearest terminal checkpoint"
 
 #### Key Constraint
 
-The constraint that matter most is "An empty warehouse tree has depth 0, and a route may continue through only one child at each level." because it ensure we handle the edge case for when the node is empty to return depth 0. else the code will fail the very first edge case. and "the route to continue through only one child at each level" ensure we handle case of Skewed tree. A node with only one child is not a terminal leaf we treat it as a leaf and stop. The route must keep going down the available path.
+The constraint that matter most is "An empty warehouse tree has depth 0, and a route may continue through only one child at each level." because it ensure we handle the edge case for when the node is empty to return depth 0. else the code will fail the very first edge case. and "the route to continue through only one child at each level" tells me how to treat node that has only one child.The route must keep going down the available path.
 
 #### Pattern
 

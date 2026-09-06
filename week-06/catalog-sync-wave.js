@@ -1,31 +1,27 @@
 /**
  * @param {TreeNode | null} root
- * @returns {number}
+ * @returns {number[][]}
  */
-function minDepth(root) {
+function levelOrder(root) {
   if (!root) {
-    return 0;
+    return [];
   }
 
-  let queue = [root];
-  let depth = 1;
+  const result = [];
+  const queue = [root];
 
   while (queue.length) {
     let levelSize = queue.length;
+    let level = [];
 
     for (let i = 0; i < levelSize; i++) {
       let node = queue.shift();
 
-      // early return 
-      if (!node.left && !node.right) {
-        return depth;
-      }
-
+      level.push(node.val);
       if (node.left) queue.push(node.left);
       if (node.right) queue.push(node.right);
     }
-    depth++;
+    result.push(level);
   }
-
-  return depth;
+  return result;
 }
