@@ -326,7 +326,7 @@ Every one of these operations on a BST costs O(h):
 - successor
 - predecessor
 
-where h - can be (log n). O(log n ) only when the tree is balanced.
+where h - can be (log n). O(log n) only when the tree is balanced.
 
 #### Inserting in BST
 
@@ -340,7 +340,7 @@ function insertIntoBST(root, val) {
     return new TreeNode(val);
   }
 
-  let node = root;
+  let node = root
   while (true) {
     // belongs on the left
     if (val < node.val) {
@@ -386,7 +386,7 @@ function inorder(root) {
     // then everything larger
     walk(node.right);
   }
-  
+
   walk(root);
   return result;
 }

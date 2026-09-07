@@ -22,25 +22,25 @@ Constraints
 
 Could you validate the log in one left-to-right pass while using memory proportional only to the number of currently unmatched entries?
 
-## Approach Plan
+### Approach Plan
 
 For every exit token, scan backwards thrugh the earlier log to find any matching token that has not been paired yet.
 
-### Key Constraint
+#### Key Constraint
 
 The constraint that matter most is "1 <= activity_log.length <= 10^4" because it allows the operation to run on a single pass
 O(N) and suitable for stack solution.
 
-### Pattern
+#### Pattern
 
 - Stack pattern
 
-### Complexity
+#### Complexity
 
 - Time O(N)
 - Space O(N) 
 
-### Steps
+#### Steps
 
 - I declare a constant that will hold the six characters '(', ')', '[', ']', '{', '}' as key, value pair,
 Where closing token map to the corresponding opening tokens. and I initialize an empty stack [].

@@ -19,25 +19,25 @@ Constraints
 
 Can you solve this in a single pass using a monotonic stack, ensuring each dock reading index is pushed and popped at most once?
 
-## Approach Plan
+### Approach Plan
 
 To solve this in a single pass using a montonic stack, I would use a stack that stores index of days with unresolved readings i.e 0,
 in non-decreasing order of their values. iterate through each days while stack is not empty and the current reading exceed the reading at the index top of the stack, pop the index and record the difference in distance i.e the difference between the current index and the popped index as the wait and push the current index in the stack.
 
-### Key Constraint
+#### Key Constraint
 
 The constraint that matter most is "1 <= readings.length <= 10^5" because it strictly rules out brute force approach of using nested loops and mandate on O(N) montonic stack solution.
 
-### Pattern
+#### Pattern
 
 - Stack pattern
 
-### Complexity
+#### Complexity
 
 - Time O(N)
 - Space O(N)
 
-### Steps
+#### Steps
 
 - Initialize a fixed array to the length of readings, and a stack in non-decreasing order of their values.
 

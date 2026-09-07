@@ -20,20 +20,20 @@ Constraints
 
 - exec_root = [10, -5, 3], budget_target = 5 - Expected result True
 
-## Approach Plan
+### Approach Plan
 
 From the problem detail. "determine whether any complete execution path from the root down to a leaf has a total accumulated cost that exactly matches a given budget target." - signify that we are expected to check if there is a path in the tree when sum will result to the budget target.
 
-### Pattern
+#### Pattern
 
 - DFS, (Post-order flow)
 
-### Complexity
+#### Complexity
 
 - Time O(N)
 - Space O(H)
 
-### Steps
+#### Steps
 
 - Handle Empty Tree (Base Case 1):
   - If exec_root is null, return false immediately (an empty tree has no paths).

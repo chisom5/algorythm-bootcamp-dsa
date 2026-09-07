@@ -19,17 +19,17 @@ F(3) = F(2) + F(1) = 1 + 1 = 2.
 
 Can you solve this iteratively in O(1) space instead of using recursion?
 
-## Approach Plan
+### Approach Plan
 
-### Key Constraint
+#### Key Constraint
 
 0 <= n <= 30 - tells me that the value is not that large, hence it can be ideal for recursion. O(2^n).
 
-### Pattern 
+#### Pattern 
 
 Recursion
 
-### Complexity
+#### Complexity
 
 - Time O(2^n)
 - Space O(n)

@@ -16,23 +16,24 @@ Constraints
 - hub_queue = [2, 5, 8], overflow_queue = [3, 6, 9] → [2, 3, 5, 6, 8, 9]
 - hub_queue = [1, 2, 4], overflow_queue = [1, 3, 4] → [1, 1, 2, 3, 4, 4]
 
-## Approach Plan
+### Approach Plan
 
 - when we combine the two queues I notice that the head change in the new list, hence I will be using dummy head node.
-### Key Constraint
+
+#### Key Constraint
 
 The constraint that matter most is "Both hub_queue and overflow_queue are sorted in non-decreasing fare order." Because it enables two pointer technique for merge and it allows O(1) space link manipulation
 
-### Pattern
+#### Pattern
 
 - Linked list, Two pointer
 
-### Complexity
+#### Complexity
 
 - Time O(N + M)
 - Space O(1)
 
-### Steps
+#### Steps
 
 - Create a dummy head node and set var tail = dummy;
 - Iterate as long as both list are not empty

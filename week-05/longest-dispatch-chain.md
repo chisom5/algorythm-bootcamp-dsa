@@ -24,19 +24,19 @@ Constraints
 
 Can you compute the deepest escalation chain while using only the call stack beyond the record structure itself?
 
-## Approach Plan
+### Approach Plan
 
 To know how many handoffs the deepest unresolved chain contains - means to know the depth or height of the tree. since A chain length counts every record visited from the initial report down to the final record. The flow is Post order DFS. because it counts every record from the children node.
 
-### Key constraint
+#### Key constraint
 
 The constraint that matter most is "The number of records in trip is in the range [0, 10^4]" because it ensure that recursion is safe for (O(H) space), though in extreme worst-case scenarios (a completely linear tree where H = 10,000), it approaches standard runtime stack frame limits."
 
-### Pattern
+#### Pattern
 
 - Tree traversal, Post order DFS
 
-### Complexity
+#### Complexity
 
 - Time O(N)
 - Space O(H)

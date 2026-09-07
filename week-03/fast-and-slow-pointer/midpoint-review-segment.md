@@ -20,22 +20,22 @@ Constraints
 
 - review = [2,4,6,8,10] → [6, 8, 10]
 
-## Approach Plan
+### Approach Plan
 
-### Key Constraint
+#### Key Constraint
 
 The constraint that matter most is "review is the first node of a singly linked chain" because it direct the fast and slow pointers pattern as a singly linked list only allow forward movement.
 
-### Pattern
+#### Pattern
 
 - Linked list, Two pointers(Fast & Slow)
 
-### Complexity
+#### Complexity
 
 - Time O(n)
 - Space O(1)
 
-### Steps
+#### Steps
 
 - initialize two pointers, slow and fast starting at the same point (head).
 - iteration and move slow one at a time while fast move twice.

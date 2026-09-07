@@ -27,22 +27,22 @@ One compression reduces the meter, and one final burn finishes the remaining poi
 Aligned values can be compressed repeatedly until only a final single point remains.
 
 
-##  Approach Plan
+###  Approach Plan
 
-### Key Constraint
+#### Key Constraint
 
 The constraint that matter most is "A meter value aligned for a split cycle (even) is halved. An unaligned value (odd) is decremented by one. Each operation counts as one manual clear." because it tells me how the algorithm uses iteration halving the input until the condition met.
 
-### Pattern
+#### Pattern
 
 Iteration (Recursion)
 
-### Complexity 
+#### Complexity 
 
 - Time O(logN)
 - Space O(logN)
 
-### Steps
+#### Steps
 
 1. Initialize count
 2. Iterate as long as input is greater than 0. meaning it will only accept positive integer.

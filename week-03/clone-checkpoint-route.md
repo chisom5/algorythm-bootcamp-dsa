@@ -26,19 +26,19 @@ Constraints
 
 Can you copy the route using only constant auxiliary space beyond the newly created checkpoints?
 
-## Approach Plan
+### Approach Plan
 
 Obviously we know that this problem is a linked list, but to create a copy of the route preserving every threshold, next relationship. this will have to be Linked list + Hash map. But the follow up question said do this in constant auxiliary space. so Hash map is out of it. we have to implement this in-place.
 
-### Key Constraint
+#### Key Constraint
 
 The constraint that matter most is "Each random shortcut is null or points to a checkpoint in the same route." because it tells me I can't recreate the random pointer by using the node's value.
 
-### Pattern
+#### Pattern
 
 - Linked list
 
-### Complexity
+#### Complexity
 
 - Time O(n)
 - Space O(1)

@@ -26,20 +26,20 @@ Constraints
 →
 [null, null, null, 1, null, 1]
 
-## Approach Plan
+### Approach Plan
 
 Main two parallel stacks: a main stack that will store all values and an auxiliary stack that will track the running minimium.
 Each time store() is called push the value to the main stack and push the min(value, aux_top) to the auxiliary stack. removeLatest() is called remove or pop from both stack. latest() read the top from the main stack
 
-### Key Constraint
+#### Key Constraint
 
 The constraint that matter most is "At most 3 * 10^4 calls will be made across all commands." because if that large call will be made across all command it helps me prevent naive scanning which is O(N) time and this would exceed time limit.
 
-### Pattern
+#### Pattern
 
 - Stack pattern
 
-### Complexity
+#### Complexity
 
 - Time O(1)
 - Space O(N)

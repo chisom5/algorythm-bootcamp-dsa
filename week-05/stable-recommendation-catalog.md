@@ -23,19 +23,19 @@ Constraints
 
 Can you determine stability while measuring each product's branch depth only once?
 
-## Approach Plan
+### Approach Plan
 
-### Key constraint
+#### Key constraint
 
 The constraint that matter most is "The number of products in catalog_root is in the range [0, 5000]" because the total number of nodes determines the maximum possible height of the tree and it dictate that we can get the solution on a single pass. O(N)
 
-### Pattern
+#### Pattern
 
 - Time O(N)
 
 - Space O(H)
 
-### Step
+#### Step
 
 To verify that the binary tree is height balanced across all node.
 

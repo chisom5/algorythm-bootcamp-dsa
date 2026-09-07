@@ -29,24 +29,24 @@ Constraints
 
 Could you use memoization to avoid recomputing subexpressions that appear more than once in the recursion tree?
 
-## Approach Plan.
+### Approach Plan.
 
 To avoid recomputing subexpressions that appear more than once in the recursion tree. I would be storing each value in a cache.
 
-### Key Constraint
+#### Key Constraint
 
 The constraint that matter most is "Return every possible result from every valid parenthesization of the expression." because it tells me I can't compute the expression only once.
 
-### Pattern 
+#### Pattern 
 
 Recursion, Dynamic Programming.
 
-### Complexity
+#### Complexity
 
 - Time O(2^n) because we explore every possible split.
 - Space O(2^n) because of recursion and we are saving every resuls.
 
-### Steps
+#### Steps
 
 1. initialize cache, and final result [].
 2. check if we have done the operation before use the value.

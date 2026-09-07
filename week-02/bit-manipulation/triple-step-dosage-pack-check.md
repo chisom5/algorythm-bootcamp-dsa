@@ -25,21 +25,22 @@ The pack can be reduced evenly by three more than once and eventually reaches th
 Although divisible by three once, the remaining count does not stay on the approved tripling ladder.
 
 #### Follow up
+
 Can you verify the pack size without using loops or recursion?
 
-## Approach Plan
+### Approach Plan
 
-### Key Constraint
+#### Key Constraint
 
 The constraint that matter most is "sample is an integer in the range [-2^31, 2^31 - 1]". it tells me that the input highest range is 
 a standard 32-bit. with this we can precalculate the largest power of 3. that fit into the 32-bit signed integer.
 And from this thinking we can bypass using recursion or loops. so our solution can account for the follow-up question.
 
-### Pattern
+#### Pattern
 
 Bit manipulation, Recursion
 
-### Complexity
+#### Complexity
 
 - Time O(1)
 - Space O(1)

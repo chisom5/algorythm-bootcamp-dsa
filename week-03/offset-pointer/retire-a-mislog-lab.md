@@ -19,22 +19,22 @@ Constraints
 - sample_chain = [33, 46], backward_position = 1 → [33]
 - sample_chain = [12, 25, 39, 44, 57], backward_position = 5 → [25, 39, 44, 57]
 
-## Approach Plan
+### Approach Plan
 
-### Key Constraint 
+#### Key Constraint 
 
 The constraint that matter most is "1 <= backward_position <= number of records in sample_chain." because it elminate out of bound edge and guarantee a vaild target node.
 
-### Pattern
+#### Pattern
 
 - Linked List, Offset pointer
 
-### Complexity
+#### Complexity
 
 - Time O(N)
 - Space O(1)
 
-### Steps
+#### Steps
 
 - Create a dummy node because the head can change as our backward_position can the val to remove head. 
 - Initialize both slow and fast pointer to dummy.

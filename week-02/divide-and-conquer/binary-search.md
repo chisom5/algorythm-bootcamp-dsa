@@ -10,9 +10,9 @@ index.
 book = ["Adeyemi", "Baptiste", "Chen", "Escobar", "Garcia", "Haddad", "Kowalski",
 "Larsen", "Mike", "Nwafor", "Okafor"] name = "Nwafor"
 
-## Approach Plan
+### Approach Plan
 
-### Pattern 
+#### Pattern 
 
 Divide and conquer -  From reading the question and knowing that the book dictionary is a sorted list already.
 

@@ -18,7 +18,7 @@ Constraints
 
 - loot_route_a = [8,5,8], loot_route_b = [8,8,5]
 
-## Approach Plan
+### Approach Plan
 
 To determine if two loot route are identical.
 
@@ -26,15 +26,15 @@ To determine if two loot route are identical.
 - if either of the route is empty - then it is not identical
 - if the loot route values are the same - it is identical
 
-### Key Constraint
+#### Key Constraint
 
 The constraint that matter most is "The total number of stops across both loot_route_a and loot_route_b is in the range [0, 100]." because it tell me that recursive solution is reasonable as maximum of 100 total nodes guarantees that the tree depth cannot exceed 100. with stack limit around 10,000 frames. (10^4), 100 recursive call will never trigger a maximium call stack exceed.
 
-### Pattern
+#### Pattern
 
 - Tree Traversal
 
-### Complexity
+#### Complexity
 
 - Time O(N)
 - Space O(h) where h - depth of the tree.

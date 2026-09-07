@@ -21,22 +21,22 @@ Constraints
 
 - release_chain = [2, 5, 5, 8, 8, 8] → [2, 5, 8]
 
-## Approach Plan
+### Approach Plan
 
-### Key constraint
+#### Key constraint
 
 The constraint that matter most is "release_chain is ordered in ascending build-rank order." because it tells me that the duplicate sit directly next to each other. and it enable O(n) & O(1) complexity as i can do this in place without needing a set.
 
-### Pattern
+#### Pattern
 
 - Linked List
 
-### Complexity
+#### Complexity
 
 - Time O(N)
 - Space O(1)
 
-### Steps
+#### Steps
 
 - on the function where releaseChain represent the listNode.
 - iterate as long as it not empty

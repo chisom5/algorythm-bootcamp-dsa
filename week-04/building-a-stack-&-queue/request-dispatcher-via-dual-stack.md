@@ -30,19 +30,19 @@ Constraints
 
 Can you design DispatchQueue so that each operation runs in amortized O(1) time? That is, any sequence of n operations completes in O(n) total time even if individual operations occasionally take longer.
 
-## Approach Plan
+### Approach Plan
 
 Since our goal is to ensure each operation runs in amortized O(1) time. -Using two stacks "inbox" stack that will store the incoming request. and an "outbox" stack that will handle the dequeuing of oldest request. before dequeue I will check if outbox is empty then transfer request from inbox into it.  front() will return the top request on the outbox stack. while isEmpty() return boolean to ensure our stack aren't empty.
 
-### Key Constraint
+#### Key Constraint
 
 The constraint that matter most is "Only stack-standard commands may be used internally: enqueue to top, front/dequeue from top, size, and isEmpty" because it forces me to make use of dual-stack approach rather than using array indexing and unshift() to dequeue.
 
-### Pattern 
+#### Pattern 
 
 - Stack Pattern.
 
-### Complexity
+#### Complexity
 
 - Time O(1)
 - Space O(N)

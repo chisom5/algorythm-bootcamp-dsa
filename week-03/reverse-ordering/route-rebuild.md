@@ -22,24 +22,24 @@ Constraints
 
 Can you rebuild the route both by walking through the chain step by step and by letting the call stack unwind the rewiring for you?
 
-## Approach Plan
+### Approach Plan
 
 - From the example input and output, I notice that the output is a reverse of the input.
 
-### Key Constraint
+#### Key Constraint
 
 The constraint that matter most is "The number of stops in order is in the range [0, 5000]" because for the input N to be 5000 it allows me to consider linear iteration reversal.
 
-### Pattern
+#### Pattern
 
 Linked List, In-place Reversal
 
-### Complexity
+#### Complexity
 
 - Time O(N)
 - Space O(1)
 
-### Steps
+#### Steps
 
 - As a single linked list, declare two pointer prev, curr. 
 - curr represent the node which is the head.

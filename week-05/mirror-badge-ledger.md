@@ -22,19 +22,19 @@ Constraints
 
 Can you reflect the branching ledger while using only the call stack or an explicit worklist, without creating a second copied structure?
 
-## Approach Plan
+### Approach Plan
 
 To reflect the branching ledger, move all the left-side branch in the subtree to the right and the right-side branch to the left.
 
-### Key Constraint
+#### Key Constraint
 
 The constraint that matter most is "The number of entries in portfolio is in the range [0, 100]" because it tell me that recursive solution is reasonable as maximum of 100 total nodes guarantees that the tree depth cannot exceed 100.
 
-### Pattern
+#### Pattern
 
 - Tree Traversal
 
-### Complexity
+#### Complexity
 
 - Time O(N)
 

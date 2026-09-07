@@ -25,7 +25,7 @@ Constraints
 
 Can you implement the symmetry check both as a recursive traversal and as an iterative traversal using an explicit queue?
 
-## Approach Plan
+### Approach Plan
 
 Two subtrees are considered mirror images when their root version identifiers match and each one's left branch mirrors the other's right branch.
 
@@ -36,15 +36,15 @@ they are consider mirror
 - If only one subtree is null - false
 - If the value are diff - false
 
-### Key Constraint
+#### Key Constraint
 
 The constraint that matter most is "The total number of nodes in the configuration tree is in the range [1, 1000]" because it guarantees safe call stack depth for recursive DFS (O(N) time, O(H) space) and O(N) space for an iterative BFS queue.
 
-### Pattern
+#### Pattern
 
 - Tree Traversal
 
-### Complexity
+#### Complexity
 
 - Time O(N)
 - Space O(h) where h - depth of the tree.

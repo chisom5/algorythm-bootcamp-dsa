@@ -20,7 +20,7 @@ Constraints
 
 Can you stop searching as soon as breadth-first search reaches the first terminal checkpoint?
 
-## Approach Plan
+### Approach Plan
 
 The problem ask to "return its minimum depth to the nearest terminal checkpoint" counting the nodes on the shortest route from the root checkpoint. this is requesting to solve the problem using Breadth-first search technique.
 

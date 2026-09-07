@@ -27,22 +27,22 @@ Two samples can come from one clean split of a single starting vial.
 #### Follow-up 
 Can you determine this without repeatedly halving the batch count?
 
-## Approach Plan
+### Approach Plan
 
-### Key Constraint
+#### Key Constraint
 
 The constraint that matter most is "A valid batch size is a positive integer that can be repeatedly divided by 2 until it reaches exactly 1; at every step before 1, it must be even." This tells me how i can approach the problem by using recursion to repeatedly divide by 2 until a condition met.
 
-### Pattern 
+#### Pattern 
 
 Bit manipulation, Recursion
 
-### Complexity
+#### Complexity
 
 - Time O(logN) because we are halving the problem by 2.
 - Space O(logN) because each recursive call adds a new frame to the stack and it grows linearly with the number of recursive calls.
 
-### Steps
+#### Steps
 
 1. determine the base case. if readings is 1 or less 
 2. recursive call by halving the reading by 2 

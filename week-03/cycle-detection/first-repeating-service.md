@@ -23,24 +23,24 @@ Constraints
 
 Can you find the repeating record with constant extra space?
 
-## Approach Plan
+### Approach Plan
 
 - From this "return the exact record where repetition begins", for a linked list i started thinking of cycle detection.
 
-### Key Constraint
+#### Key Constraint
 
 Thou this constraint "The chain has 0 through 10^4 records before any repetition." rules out array/set since i want O(1) space. but the constraint that matter most is ""Record values may repeat, so identity—not a matching value—defines the first repeating record." (along with "Return the actual cycle-entry record object")" because it prevent value base trap. as multiple node can have the same .val, so if i compare only node value the algorithm will fail. 
 
-### Pattern
+#### Pattern
 
 - Linked list, Two pointers
 
-### Complexity
+#### Complexity
 
 - Time O(N)
 - Space O(1)
 
-### Steps
+#### Steps
 
 - declare and initialize slow and fast to point at the listNode "server"
 - Traverse at dual speeds move slow by 1 step and fast by 2 steps. while fast and fast.next is not null
