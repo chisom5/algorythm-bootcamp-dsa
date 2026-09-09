@@ -16,6 +16,7 @@ Constraints
 - k = 4, root = [5, 1, 7, None, 2, None, 8, None, 3]  - Expected result 5
 
 ### Approach Plan
+
 Perform an in-order traversal of the binary search tree, keeping track of the number of nodes visited. When the count reaches k, return the current node's quote.
 
 #### Key Constraint

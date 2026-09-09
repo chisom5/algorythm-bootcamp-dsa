@@ -391,3 +391,30 @@ function inorder(root) {
   return result;
 }
 ```
+
+#### Lowest common ancestor (LCA)
+
+The lowest common ancestor of two nodes p and q in a BST is the node that is the deepest node that has both p and q as descendants.
+
+BST - value tells which way to go, so no searching is require at all. If both p and q are smaller than the current node, then LCA lies in left subtree. If both p and q are greater than the current node, then LCA lies in right subtree. Otherwise, the current node is the LCA.
+
+```js
+function lowestCommonAncestor(root, p, q) {
+  let node = root;
+  while (node) {
+    // both smaller
+    if (p.val < node.val && q.val < node.val) {
+      // go left
+      node = node.left;
+    // both larger
+    } else if (p.val > node.val && q.val > node.val) {
+      // go right
+      node = node.right;
+    } else {
+      // the split point
+      return node;
+    }
+  }
+  return null;
+}
+```
