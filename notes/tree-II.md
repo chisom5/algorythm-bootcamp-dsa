@@ -163,7 +163,7 @@ while (queue.length) {
 | level order | A: level = [] · B: level.append(val) · C: result.append(level) |
 | Right side view | B: if i === level_size - 1: result.append(val) |
 | Left side view | B: if i === 0: result.append(val) |
-| Largest value per leve | A: best = -inf · B: best = max(best, val) · C: append best |
+| Largest value per level | A: best = -inf · B: best = max(best, val) · C: append best |
 | Average of levels | A: total = 0 · B: total += val · C: append total / level_size |
 | Level sum | A: total = 0 · B: total += val · C: append total. |
 | Minimum depth | B: if leaf: return depth |

@@ -30,6 +30,7 @@ The goal is instinct. By the end of the program, when you see a problem you'll r
 - Week 04 : Stack & Queue
 - Week 05 : Tree I
 - Week 06 : Tree II
+- Week 07 : Graph I
 
 ## Week Details (first 4 weeks)
 
@@ -55,7 +56,11 @@ The goal is instinct. By the end of the program, when you see a problem you'll r
 
 - Week 06 - Tree II
   - Topics: Breadth first search (BFS) and level-order traversal, binary search tree, lowest common ancestor, construction and serialization.
+  - Goals: understand BFS and traversing level by level, BFS template, in handling Largest value per level, rightmost value per level, average of levels, level sum, minimum & maximum depth, validate BST etc. And understanding BST properties, inserting and deleting nodes, and finding the kth smallest element in a BST.
 
+- Week 07 - Graph I
+  - Topics: Graph representation (adjacency list/matrix), DFS & BFS on graphs, connected components, topological sort, cycle detection
+  - Goals: Implement graph traversal algorithms, detect cycles, find connected components, perform topological sorting
 
 ## Resources
 
