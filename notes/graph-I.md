@@ -125,3 +125,18 @@ const m = buildMatrix(7, edges);
 console.log(neighbors(m, 3));
 ```
 * Time and Space complexity - Time = O(V) Space = O(V**2)
+
+#### Graphs hiding in grids
+
+A two-dimensional grid is a graph. Every cell is a vertex. 
+
+- A vertex is a coordinate pair (row, col).
+
+- Nothing is stored about the edges. Neighbours are computed on demand from the coordinates.
+
+- The neighbours of `${r},${c}` are (r−1, c), (r+1, c), (r, c−1) and (r, c+1): the four directions
+
+- A grid with R rows and C columns has V = R · C vertices and roughly E ≈ 2 · R · C edges.
+
+A grid is not an adjacency matrix
+The two are both rectangular tables of cells, and they are easy to confuse. They are entirely different objects.
