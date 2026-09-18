@@ -209,3 +209,78 @@ function buildFromN(n, edges) {
   return graph;
 }
 ```
+
+#### Tree DFS on Graphs
+
+Tree DFS breaks on graph if implemented as a standard tree traversal because graphs can contain cycles and multiple paths to the same node, whereas trees cannot. Trees never revisit a node because every edge points down, away from the root. A graph has no "down".
+
+The Difference between Tree and Graph:
+
+- Trees: A tree is a directed acyclic graph (DAG) where every node (except the root) has exactly one parent, and there is only one path between the root and any node. There are no cycles.
+
+- Graphs: Nodes can have multiple parents/incoming edges, and nodes can point back to previously visited ancestors (cycles) or cross-connect to other branches.
+
+#### Why Tree DFS Fails on Graphs
+
+When you run a standard tree DFS which recursively visits children without tracking where it has been. a graph causes two major failures on this:
+
+1. Infinite loop and stack overflow: If a graph contains a directed cycle (e.g., $A \rightarrow B \rightarrow C \rightarrow A$), tree DFS will infinitely call itself along the cycle until it crashes with a StackOverflowError or maximum recursion depth error.
+
+2. Duplicate process and redundant work: In a directed graph without cycle (e.g., $A \rightarrow B \rightarrow D$ and $A \rightarrow C \rightarrow D$), tree DFS will visit node $D$ multiple times via different paths. While it won't loop infinitely, it destroys the time complexity, turning an $O(V + E)$ graph traversal into an exponential $O(2^V)$ operations worst-case.
+
+```js
+// ❌ TREE DFS (Breaks on graphs with cycles/re-visits)
+function dfsTree(node) {
+  if (!node) return;
+  
+  process(node);
+  
+  for (const neighbor of node.neighbors) {
+    dfsTree(neighbor); // Will recurse endlessly if neighbor points back to an ancestor
+  }
+}
+
+// ✅ GRAPH DFS (Tracks visited state)
+function dfsGraph(node, visited = new Set()) {
+  if (!node || visited.has(node)) return;
+  
+  visited.add(node); // Track visited state
+  process(node);
+  
+  for (const neighbor of node.neighbors) {
+    dfsGraph(neighbor, visited);
+  }
+}
+```
+
+#### Iterative DFS with a stack
+
+We can traverse a graph using a stack you can manage yourself, here there is no recursive limit.
+
+Example: Visit every vertex reachable from A once. Expected order: [A, C, D, E, B],  using iterative DFS
+
+```js
+function iterativeDfs(graph, start){
+  let visited = new Set();
+  let stack = [start];
+  let order =[];
+
+  while(stack.length){
+    let node = stack.pop();
+
+    if(visited.has(node)){
+      continue;
+    }
+    visited.add(node);
+    order.push(node);
+
+    for(let adj of graph){
+      if(!(visited.has(adj))){
+        stack.push(adj)
+      }
+    }
+  }
+
+  return order;
+}
+```
