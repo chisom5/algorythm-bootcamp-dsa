@@ -5,6 +5,8 @@
  * @param {number} destination
  * @returns {boolean}
  */
+
+// iterative BFS approach
 function validPath(n, edges, source, destination) {
   if (source === destination) return true;
 
@@ -23,10 +25,12 @@ function validPath(n, edges, source, destination) {
 
   const queue = [source]; // track node we need to explore
   const visited = new Set([source]);
+  let front = 0;
 
   // traverse.
-  while (queue.length > 0) {
-    let current = queue.shift();
+  while (front < queue.length ) {
+    // let current = queue.shift();
+    let current = queue[front++]; //take from the front
 
     if (current === destination) return true;
 

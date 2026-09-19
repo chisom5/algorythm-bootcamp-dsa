@@ -232,9 +232,9 @@ When you run a standard tree DFS which recursively visits children without track
 // ❌ TREE DFS (Breaks on graphs with cycles/re-visits)
 function dfsTree(node) {
   if (!node) return;
-  
+
   process(node);
-  
+
   for (const neighbor of node.neighbors) {
     dfsTree(neighbor); // Will recurse endlessly if neighbor points back to an ancestor
   }
@@ -243,10 +243,10 @@ function dfsTree(node) {
 // ✅ GRAPH DFS (Tracks visited state)
 function dfsGraph(node, visited = new Set()) {
   if (!node || visited.has(node)) return;
-  
+
   visited.add(node); // Track visited state
   process(node);
-  
+
   for (const neighbor of node.neighbors) {
     dfsGraph(neighbor, visited);
   }
@@ -257,30 +257,55 @@ function dfsGraph(node, visited = new Set()) {
 
 We can traverse a graph using a stack you can manage yourself, here there is no recursive limit.
 
-Example: Visit every vertex reachable from A once. Expected order: [A, C, D, E, B],  using iterative DFS
+Example: Visit every vertex reachable from A once. Expected order: [A, C, D, E, B], using iterative DFS
 
 ```js
-function iterativeDfs(graph, start){
+function iterativeDfs(graph, start) {
   let visited = new Set();
   let stack = [start];
-  let order =[];
+  let order = [];
 
-  while(stack.length){
+  while (stack.length) {
     let node = stack.pop();
 
-    if(visited.has(node)){
+    if (visited.has(node)) {
       continue;
     }
     visited.add(node);
     order.push(node);
 
-    for(let adj of graph){
-      if(!(visited.has(adj))){
-        stack.push(adj)
+    for (let adj of graph) {
+      if (!visited.has(adj)) {
+        stack.push(adj);
       }
     }
   }
 
   return order;
+}
+```
+
+N.B Both Recursive and iterative are valid depth first searches. Both visit every reachable vertex exactly once. And they visit in different orders.
+
+E.g Recursive from A - visit A B D C E. while Iterative from A - visit A C D E B
+
+### BFS Graph
+
+The visited-set rule for BFS: mark a vertex when you put it in the queue, not when you take it out.
+
+so the code for iterativeDFS above will be change here
+
+```js
+while (stack.length) {
+  let node = stack.shift();
+
+  // process
+
+  for (let adj of graph) {
+    if (!visited.has(adj)) {
+      visited.add(node);
+      stack.push(adj);
+    }
+  }
 }
 ```
