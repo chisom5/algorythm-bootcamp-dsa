@@ -12,7 +12,7 @@ The goal is instinct. By the end of the program, when you see a problem you'll r
 
 - Weekly topic + hands-on exercises
 - Live/recorded lectures and Q&A Deep dive
-- Weekly mini-projects and timed problem sets
+- Weekly mini-projects and problem sets
 - Final capstone project and cumulative review in Week 12
 
 ## Learning Objectives
