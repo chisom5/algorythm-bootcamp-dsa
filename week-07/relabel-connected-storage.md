@@ -40,3 +40,26 @@ the constraint that matter most is "Adjacent cells share a side, not merely a co
 
 - Space O(m * n)
 
+#### Step
+
+1. Save Original label & Validate Base Case.
+    - Extract grid dimensions (rows and cols).
+    - Read the starting label at originalColor = image[sr][sc].
+    - Check if originalColor === color. If they are equal, return image immediately to prevent infinite or redundant work.
+
+2. Define the 4-Directional offsets. & Seed the LIFO Stack
+    - Define a directions array for orthogonal movement: directions = [[-1, 0], [1, 0], [0, -1], [0, 1]] (Up, Down, Left, Right).
+    - Push [sr, sc] into stack to initialize the iterative search.
+
+3. Execute Iterative Depth-First Search (DFS) Traversal Loop
+    - While stack.length > 0:
+    - stack.pop() extracts [r, c], giving LIFO (Depth-First Search) behavior.
+    - Iterate through the four orthogonal direction vectors [dr, dc] (Up, Down, Left, Right).
+
+4. Neighbor Exploration & In-Place Mutation
+    For each neighbor coordinate (newR, newC):
+    - Boundary Check: Ensure 0 <= newR < rows and 0 <= newC < cols.
+    - Matching Check: Verify image[newR][newC] === originalColor.
+    - Recolor on Push: Immediately mutate image[newR][newC] = color to mark it visited before pushing [newR, newC] onto stack Marking on push prevents duplicate coordinates from filling up stack memory.
+
+5. Return the modified Grid.
