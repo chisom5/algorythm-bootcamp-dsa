@@ -289,7 +289,7 @@ N.B Both Recursive and iterative are valid depth first searches. Both visit ever
 
 E.g Recursive from A - visit A B D C E. while Iterative from A - visit A C D E B
 
-### BFS Graph
+#### BFS Graph
 
 The visited-set rule for BFS: mark a vertex when you put it in the queue, not when you take it out.
 
@@ -305,6 +305,32 @@ while (stack.length) {
     if (!visited.has(adj)) {
       visited.add(node);
       stack.push(adj);
+    }
+  }
+}
+```
+
+####  Grid Traversal BFS
+
+```js
+function bfsGrid(grid, startRow, startCol) {
+  const rows = grid.length, cols = grid[0].length;
+  const queue = [[startRow, startCol]];
+  grid[startRow][startCol] = '0'; // Mutate to mark visited
+
+  const directions = [[-1, 0], [1, 0], [0, -1], [0, 1]]; // Up, Down, Left, Right
+
+  while (queue.length > 0) {
+    const [r, c] = queue.shift();
+
+    for (const [dr, dc] of directions) {
+      const newR = r + dr, newC = c + dc;
+
+      // Boundary check + condition check
+      if (newR >= 0 && newR < rows && newC >= 0 && newC < cols && grid[newR][newC] === '1') {
+        grid[newR][newC] = '0'; // Mark visited
+        queue.push([newR, newC]);
+      }
     }
   }
 }
