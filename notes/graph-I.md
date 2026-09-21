@@ -310,25 +310,39 @@ while (stack.length) {
 }
 ```
 
-####  Grid Traversal BFS
+#### Grid Traversal BFS
 
 ```js
 function bfsGrid(grid, startRow, startCol) {
-  const rows = grid.length, cols = grid[0].length;
-  const queue = [[startRow, startCol]];
-  grid[startRow][startCol] = '0'; // Mutate to mark visited
+  const rows = grid.length,
+    cols = grid[0].length;
 
-  const directions = [[-1, 0], [1, 0], [0, -1], [0, 1]]; // Up, Down, Left, Right
+  const queue = [[startRow, startCol]];
+  grid[startRow][startCol] = "0"; // Mutate to mark visited
+
+  const directions = [
+    [-1, 0],
+    [1, 0],
+    [0, -1],
+    [0, 1],
+  ]; // Up, Down, Left, Right
 
   while (queue.length > 0) {
     const [r, c] = queue.shift();
 
     for (const [dr, dc] of directions) {
-      const newR = r + dr, newC = c + dc;
+      const newR = r + dr,
+        newC = c + dc;
 
       // Boundary check + condition check
-      if (newR >= 0 && newR < rows && newC >= 0 && newC < cols && grid[newR][newC] === '1') {
-        grid[newR][newC] = '0'; // Mark visited
+      if (
+        newR >= 0 &&
+        newR < rows &&
+        newC >= 0 &&
+        newC < cols &&
+        grid[newR][newC] === "1"
+      ) {
+        grid[newR][newC] = "0"; // Mark visited
         queue.push([newR, newC]);
       }
     }
@@ -369,7 +383,7 @@ function countComponentsDFS(numVertices, edges) {
   for (let i = 0; i < numVertices; i++) {
     if (!visited[i]) {
       componentCount++; // Found a new unvisited component
-      dfs(i);           // Mark all connected nodes
+      dfs(i); // Mark all connected nodes
     }
   }
 
@@ -377,4 +391,40 @@ function countComponentsDFS(numVertices, edges) {
 }
 ```
 
+The pattern is first build the adjacency list, initialize componentCount and visited mark to prevent us from counting twice. then iterate through all node and perform dfs or bfs.
 
+N.B - Same thing for grids, while counting connected components in grid:
+
+- get grid dimensions, setup traversal i.e directions, initialize count of component as 0
+- scan all cells in the grid and increment count only when we found a new unvisited component
+- then perfrom the bfs or dfs.
+
+```js
+function countGridComponentsBFS(grid) {
+  let rows = grid.length;
+  let cols = grid[0].length;
+
+  const directions = [
+    [-1, 0],
+    [1, 0],
+    [0, -1],
+    [0, 1],
+  ];
+
+  let count = 0;
+
+  //   scan every cell
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      //unvisited "1"
+      if (grid[r][c] === "1") {
+        count++;
+
+        grid[r][c] = "0"; //  mark starting cell
+
+        // perform bfs
+      }
+    }
+  }
+}
+```
