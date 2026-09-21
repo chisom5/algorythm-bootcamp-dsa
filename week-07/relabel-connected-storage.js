@@ -5,6 +5,8 @@
  * @param {number} color
  * @returns {number[][]}
  */
+
+// iterative DFS
 function floodFill(image, sr, sc, color) {
   const rows = image.length;
   const cols = image[0].length;

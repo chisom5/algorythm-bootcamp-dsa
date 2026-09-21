@@ -335,3 +335,46 @@ function bfsGrid(grid, startRow, startCol) {
   }
 }
 ```
+
+#### Counting connected component
+
+The approach for counting connected component differ depending if the graph is directed or undirected.
+
+For undirected graphs, connected components are disjoint set of reachable nodes.
+
+- Template.
+
+```js
+function countComponentsDFS(numVertices, edges) {
+  // 1. Build Adjacency List
+  const graph = Array.from({ length: numVertices }, () => []);
+  for (const [u, v] of edges) {
+    graph[u].push(v);
+    graph[v].push(u);
+  }
+
+  const visited = new Array(numVertices).fill(false);
+  let componentCount = 0;
+
+  function dfs(node) {
+    visited[node] = true;
+    for (const neighbor of graph[node]) {
+      if (!visited[neighbor]) {
+        dfs(neighbor);
+      }
+    }
+  }
+
+  // 2. Iterate through all nodes
+  for (let i = 0; i < numVertices; i++) {
+    if (!visited[i]) {
+      componentCount++; // Found a new unvisited component
+      dfs(i);           // Mark all connected nodes
+    }
+  }
+
+  return componentCount;
+}
+```
+
+

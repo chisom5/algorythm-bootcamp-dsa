@@ -28,7 +28,7 @@ function validPath(n, edges, source, destination) {
   let front = 0;
 
   // traverse.
-  while (front < queue.length ) {
+  while (front < queue.length) {
     // let current = queue.shift();
     let current = queue[front++]; //take from the front
 
@@ -49,4 +49,37 @@ function validPath(n, edges, source, destination) {
     }
   }
   return false;
+}
+
+// recursive DFS
+function validPath(n, edges, source, destination) {
+  if (source === destination) return true;
+
+  // build adjacent list
+  const graph = Array.from({ length: n }, () => []);
+  for (let [u, v] of edges) {
+    graph[u].push(v);
+    graph[v].push(u);
+  }
+
+  const visited = new Array(n).fill(false); // mark visited
+
+  // dfs helper
+  function dfs(node) {
+    if (node === destination) { //base case
+      return true;
+    }
+
+    visited[node] = true;
+    for (const neighbor of graph[node]) {
+      // if (!visited[neighbor]) {
+      //   if (dfs(node)) return true;
+      // }
+      if(!visited[neighbor] && dfs(node)) return true;
+    }
+
+    return false;
+  }
+
+  return dfs(source)
 }
