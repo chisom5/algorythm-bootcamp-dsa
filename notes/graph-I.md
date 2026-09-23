@@ -437,4 +437,57 @@ This works because every edge has the same cost. with weights, a path with more 
 
 - Tracking distance
 
-BFS knows layers, so to return distances, we record them.
+BFS knows layers, so to return distances, we record them and every edge has a cost/distance of 1. so BFS naturally finds the shortest path in terms of edge count.
+
+- Method 1
+
+```js
+function bfsDistances(graph, start) {
+  const dist = [];
+  let queue = [start];
+  let front = 0;
+
+  dist[start] = 0; //starting distance.
+
+  while (front < queue.length) {
+    let node = queue[front++];
+    let currentDist = dist[node];
+
+    for (let neighbor of graph[node]) {
+      if (dist[neighbor] === undefined) {
+        dist[node] = currentDist + 1;
+        queue.push(node);
+      }
+    }
+  }
+  return dist;
+}
+```
+
+- Method 2
+
+```js
+function bfsDistances(graph, start) {
+  let queue = [];
+  let visited = [];
+  const dist = {};
+  let front = 0;
+
+  queue.push({ node: start, depth: 0 }); // starting node
+
+  visited[start] = true; // visited mark
+
+  while (front < queue.length) {
+    const { node, depth } = queue[front++];
+    dist[node] = depth;
+
+    for (let neighbor of graph[node]) {
+      if (!visited[neighbor]) {
+        visited[neighbor] = true;
+        queue.push({ node: neighbor, depth: depth + 1 });
+      }
+    }
+  }
+  return dist;
+}
+```

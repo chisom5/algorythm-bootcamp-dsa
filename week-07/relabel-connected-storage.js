@@ -13,7 +13,7 @@ function floodFill(image, sr, sc, color) {
   const stack = [[sr, sc]];
 
   const originalColor = image[sr][sc]; // save starting cell original label
-  image[sr][sc]; //visited mark
+  image[sr][sc] = color; //visited mark
 
   const directions = [
     [-1, 0],
