@@ -35,7 +35,13 @@ The constraint that matter most is "Locations connect only to their horizontal a
 
 #### Pattern 
 
-- Grid traversal
+- Grid traversal, (Connected component)
+
+#### Complexity
+
+- Time O(M * N)
+
+- Space O(M * N)
 
 #### Steps
 

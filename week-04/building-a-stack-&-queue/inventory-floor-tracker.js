@@ -24,6 +24,7 @@ class InventoryFloor {
     this.aux = [];
   }
 
+  // push
   store(val) {
     this.main.push(val);
     if (this.aux.length === 0) {
@@ -34,15 +35,18 @@ class InventoryFloor {
     }
   }
 
+  // pop
   removeLatest() {
     this.main.pop();
     this.aux.pop();
   }
 
+  // peek
   latest() {
     return this.main[this.main.length - 1];
   }
 
+  // get min
   lowestStored() {
    return this.aux[this.aux.length - 1]
   }

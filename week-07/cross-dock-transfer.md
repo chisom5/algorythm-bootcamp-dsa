@@ -34,13 +34,13 @@ The costraint that matter most is 1 <= n <= 2 * 10^5 because it tells me that th
 
 #### Pattern
 
-- BFS or DFS
+- BFS or DFS (Path)
 
 #### Complexity
 
-- Time O(n + E)
+- Time O(V + E)
 
-- Space O(n + E)
+- Space O(V + E)
 
 #### Steps
 

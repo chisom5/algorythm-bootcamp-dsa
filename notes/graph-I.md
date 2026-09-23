@@ -431,4 +431,10 @@ function countGridComponentsBFS(grid) {
 
 #### BFS find Shortest Path
 
+In an unweighted graph, BFS visits vertices in order of distance from the start. All vertices at start distance are processed before any at other distance, and so on. Therefore the first time BFS reaches a vertex, it has reached it along a shortest path.
 
+This works because every edge has the same cost. with weights, a path with more edges can be cheaper and BFS is wrong. that's the case of Dijkstra's algorithm.
+
+- Tracking distance
+
+BFS knows layers, so to return distances, we record them.

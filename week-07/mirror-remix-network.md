@@ -38,9 +38,9 @@ The constraint that matter most is "When non-empty, every track is reachable fro
 
 #### Complexity 
 
-- Time O(m * n)
+- Time O(M * N)
 
-- Space O(m * n)
+- Space O(M * N)
 
 #### Steps
 
