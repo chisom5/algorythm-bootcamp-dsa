@@ -596,3 +596,20 @@ function shortestPathInGrid(grid, start, target) {
   return -1;
 }
 ```
+
+N.B = DFS does not give shortest path because it follow one route as far as it can get. And the first route it finds is which ever route the neighbour order produce. Thou it can be fixed by trying every path and keeping the shortest but that's worst case.
+
+So anytime the words "shortest", "fewest" or "minimum number of steps" appear in an unweighted graph problem, the answer is BFS.
+
+#### Choosing between DFS or BFS
+
+Both visit every reachable vertices in O(V + E). When the task as for 
+
+1. Is there a path from u to v? -  can use either
+2. Shortest path, fewest hops -  BFS
+3. Count or label components -  can use either
+4. Flood fill, island  -  can use either 
+5. Does a path with property P exist? Backtracking, puzzles - DFS
+6. Target is probably near the start - BFS
+7. Graph is very deep, recursion limit is a concern - Iterative BFS or DFS
+8. Graph is very wide, and memory is a concern - DFS
