@@ -491,3 +491,108 @@ function bfsDistances(graph, start) {
   return dist;
 }
 ```
+
+#### Reconstructing the path
+
+Find the shortest path, but we also want the path or route to get to the shortest distance.
+
+```js
+/**
+ *  where start - is our source for the traversal.
+ * target is our destination.
+ * graph - our adjacency list.
+ **/
+function shortestPath(graph, start, target) {
+  if (start === target) return [start];
+
+  const parent = new Map([[start, null]]);
+  // const parent = [];
+  let dist = [];
+  let queue = [start];
+  let front = 0;
+
+  dist[start] = 0; // starting distance
+
+  while (front < queue.length) {
+    let node = queue[front++];
+    let currentDist = dist[node];
+
+    if (node === target) {
+      break;
+    }
+
+    for (let nbr of graph[node]) {
+      if (dist[nbr] === undefined) {
+        dist[nbr] = currentDist + 1;
+        // parent[nbr] = node;
+        parent.set(nbr, node);
+        queue.push(nbr);
+      }
+    }
+  }
+
+  if (!parent.has(target)) return []; // unreachable target
+
+  // walk back from target to start
+  let path = [];
+  let curr = target;
+
+  while (curr !== null) {
+    path.push(curr);
+    curr = parent.get(curr);
+  }
+
+  path.reverse();
+  return path;
+}
+```
+
+In Grid: shortest path
+
+```js
+function shortestPathInGrid(grid, start, target) {
+  const row = grid.length;
+  const col = grid[0].length;
+
+  const directions = [
+    [-1, 0],
+    [1, 0],
+    [0, -1],
+    [0, 1],
+  ];
+
+  const [startR, startC] = start;
+  const [targetR, targetC] = target;
+
+  if (startR === targetR && startC === targetC) return 0;
+
+  const queue = [[startR, startC, 0]];
+  let front = 0;
+
+  grid[startR][startC] = "0"; // visited;
+
+  while (front < queue.length) {
+    const [r, c, d] = queue[front++];
+
+    if (r === targetR && c === targetC) {
+      return d;
+    }
+
+    for (let [dr, dc] of directions) {
+      let newR = r + dr;
+      let newC = c + dc;
+
+      if (newR >= 0 && newR < row && newC >= 0 && newC < col) {
+        // unvisited
+        if (grid[newR][newC] === "1") {
+          grid[newR][newC] = "0";
+          queue.push([newR, newC, d + 1]);
+        }
+      }
+    }
+  }
+
+  // there is no path
+  return -1;
+}
+```
