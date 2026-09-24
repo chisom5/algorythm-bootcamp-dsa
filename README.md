@@ -31,6 +31,7 @@ The goal is instinct. By the end of the program, when you see a problem you'll r
 - Week 05 : Tree I
 - Week 06 : Tree II
 - Week 07 : Graph I
+- Week 08 : Graph II
 
 ## Week Details (first 4 weeks)
 
@@ -59,9 +60,13 @@ The goal is instinct. By the end of the program, when you see a problem you'll r
   - Goals: understand BFS and traversing level by level, BFS template, in handling Largest value per level, rightmost value per level, average of levels, level sum, minimum & maximum depth, validate BST etc. And understanding BST properties, inserting and deleting nodes, and finding the kth smallest element in a BST.
 
 - Week 07 - Graph I
-  - Topics: Graph representation (adjacency list/matrix), DFS & BFS on graphs, connected components, topological sort, cycle detection
-  - Goals: Implement graph traversal algorithms, detect cycles, find connected components, perform topological sorting
+  - Topics: Graph representation (adjacency list/matrix), DFS & BFS on graphs, connected components, shortest path, Weighted & Unweighted graph, Directed & Undirected graph
+  - Goals: Implement graph traversal algorithms (BFS, DFS), Undirected & Directed Graph, Weighted & Unweighted Graph, find connected components, Shortest path and reconstructing path
 
+- Week 08 - Graph II
+ - Topics: Cycle detection in directed graphs,  topological sort, Dijkstra's algorithm, union find, Minimum spanning trees
+   - Goals: detect cycles,  perform topological sorting
+   
 ## Resources
 
 - Synapse: AI tutor, language: JavaScript
