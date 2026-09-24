@@ -24,7 +24,22 @@ Constraints
 
 - There are no duplicate connections.
 
-### Approach Plan
+### Examples
+
+- Input: n = 6, connections = [[0, 1], [1, 2], [3, 4]]  -> Output: 3
+    Explanation: 
+    There are two clusters in the network:
+    - Cluster 1: [0, 1, 2] with size 3
+    - Cluster 2: [3, 4] with size 2
+    Server 5 is isolated (Cluster 3: [5] with size 1).
+    The largest cluster has a size of 3.
+
+- Input: n = 4, connections = [] -> Output: 1
+    Explanation: 
+    There are no connections, so each server forms its own cluster of size 1.
+    The largest cluster size is 1.
+
+#### Approach Plan
 
 From the question, the graph is an undirected graph, and there are no duplicate connections means that the graph is a sparse graph and no self loop means that a node doesn't start and end on itself. hence we can use BFS or DFS for this implementation.
 
