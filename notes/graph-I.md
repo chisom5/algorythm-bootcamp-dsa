@@ -422,7 +422,7 @@ function countGridComponentsBFS(grid) {
 
         grid[r][c] = "0"; //  mark starting cell
 
-        // perform bfs
+        // perform bfs or dfs
       }
     }
   }
