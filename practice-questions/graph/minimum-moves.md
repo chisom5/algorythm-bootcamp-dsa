@@ -40,3 +40,7 @@ Explanation: One shortest path sequence of 6 moves is:
 
 - Input: start = [0, 0], target = [2, 1]  -> Output: 1
 Explanation: The knight can move directly from (0, 0) to (2, 1) in 1 move.
+
+### Approach Plan
+
+From the question, "minimum number of moves required for the knight to reach the target position". for the grid traversal, we are expected to find the shortest path
