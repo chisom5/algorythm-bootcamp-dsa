@@ -100,7 +100,7 @@ function findRedundantConnectionDFS(n, edges) {
       if (node === target) return true; // there is a path
 
       for (let nbr of graph[node]) {
-        if(!visited[nbr]){
+        if (!visited[nbr]) {
           visited[nbr] = true;
           stack.push(nbr);
         }
@@ -118,10 +118,89 @@ function findRedundantConnectionDFS(n, edges) {
     graph[v].push(u);
   }
 
-return [] // if no edge closes cycle.
+  return []; // if no edge closes cycle.
 }
 ```
 
 ### Visited array doesn't work for cycle detection in directed graph
 
 The undirected parent rule does not apply here. In a directed graph, an edge from a vertex to its DFS parent is a real directed edge; together with the discovery edge, it forms a two-edge cycle. We need states that describe the current DFS call path.
+
+### 3 DFS States: Unseen, Active and Done.
+
+- Unseen: means the DFS has not started (recurse into it)
+
+- Active: Its call is on the current unfinished path. (here report a directed cycle)
+
+- Done: Its outgoing work, finished without a cycle. (skip it's completed work)
+
+#### Exercise 1:
+
+Given a total of numCourses courses you have to take, labeled from 0 to numCourses - 1. You are given an array prerequisites where prerequisites[i] = [a_i, b_i] indicates that you must take course b_i first if you want to take course a_i.
+
+- For example, the pair [0, 1] indicates that to take course 0 you have to first take course 1.
+
+Return true if you can finish all courses. Otherwise, return false.
+
+Constraint
+
+- 1 <= numCourses <= 2000
+
+- 0 <= prerequisites.length <= 5000
+
+- prerequisites[i].length == 2
+
+- 0 <= a_i, b_i < numCourses
+
+- All the pairs prerequisites[i] are unique.
+
+E.g: Input: numCourses = 2, prerequisites = [[1, 0]]
+
+### Answer:
+
+Building from what we already know. from the constraint the numCourses is up to 2000. and this is safe for us to use recursive dfs. and the keyword "prerequisites" means you must have done task a before b. This indicated that the graph is a directed graph.
+
+- build adjacency list and a state array that uses 3 state instead of using a visited array of boolean.
+
+```js
+/**
+ *  state 0 - Unseen
+ *  state 1 - Visited(Active)
+ *  state 2 - Done
+ **/
+
+function can_finish(num_courses, prerequisites) {
+  const graph = Array({ length: num_courses }, () => []);
+  for (let [u, v] of prerequisites) {
+    graph[u].push(v);
+  }
+
+  const state = new Array(num_courses).fill(0);
+
+  function dfs(course) {
+    state[course] = 1; // active
+
+    for (let next_course of graph[course]) {
+      if (state[next_course] === 1) {
+        return false;
+      }
+
+      if (state[next_course] === 0 && !dfs(next_course)) {
+        return false;
+      }
+    }
+
+    state[course] = 2; // done
+    return true;
+  }
+
+// check all component inlcuding disconnected component.
+  for (let i = 0; i < num_courses; i++) {
+    if (state[i] === 0 && !dfs(i)) {
+      return false;
+    }
+  }
+
+  return true;
+}
+```
