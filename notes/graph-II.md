@@ -204,3 +204,30 @@ function can_finish(num_courses, prerequisites) {
   return true;
 }
 ```
+
+N.B: Specific keywords, relationship patterns, and structural characteristics that determine the kind of graph problem 
+
+1. One-way relationship: 
+Keywords - like "A leads to B", "A points to B", "A transfers to B", "one-way street", "can only move from X to Y".
+
+Hint - is a directed graph
+
+2. Order Requirement:
+Keywords - "Prerequisites", "Task A must be completed before Task B", "Precedence", "Dependency tree/graph", "Build order", "Compilation order".
+
+Hint - Topological Sort or 3 - state DFS.
+
+3. Explicit Edge Format in Input:
+Keywords - "array pair order, if the problem specify that in [u, v], the order matters: "An edge [a, b] means course b is a prerequisite for course a."
+
+Hinit - Adjacency list must represent entry as graph[u] = [v]
+
+### What's a topological order
+
+A topological order lists every vertex of a directed graph exactly once so that, for every edge u → v, vertex u appears before vertex v. From the prerequisite graph example, every prerequisite appears before the course or task that needs it.
+
+If we have a graph order represented as [0,1,2,3] and [0,2,1,3]. we notice that both place 0 before 1 and 2, and both place 1 and 2 before 3. “topological” does not mean numerical or alphabetical.
+
+If we have the sequence as [0, 1, 3, 2] it is invalid because edge 2 → 3 requires 2 to appear first. To check a proposed order, record each vertex’s position and confirm position[u] < position[v] for every edge. Also check that every vertex appears exactly once.
+
+Topological order is useful in a directed acyclic graph. a directed graph that has no cycle
