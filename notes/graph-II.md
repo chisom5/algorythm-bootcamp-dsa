@@ -230,4 +230,4 @@ If we have a graph order represented as [0,1,2,3] and [0,2,1,3]. we notice that 
 
 If we have the sequence as [0, 1, 3, 2] it is invalid because edge 2 → 3 requires 2 to appear first. To check a proposed order, record each vertex’s position and confirm position[u] < position[v] for every edge. Also check that every vertex appears exactly once.
 
-Topological order is useful in a directed acyclic graph. a directed graph that has no cycle
+Topological order is useful in a directed acyclic graph. a directed graph that has no cycle. To recongize when to apply topological sorting, check for the problem statements such as “must happen before,” “depends on,” or “requires.” If those requirement is a directed edges and the requested output is a valid overall order, topological sorting is a likely fit.
