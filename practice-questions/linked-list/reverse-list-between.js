@@ -22,8 +22,8 @@ function reverseBetween(head, left, right) {
     prev = prev.next;
   }
 
-  let slow = prev.next; //start reverse
-  let fast = slow; //end
+  let slow = prev.next; //start point
+  let fast = slow; //ending point
 
   for (let i = left; i <= right; i++) {
     fast = fast.next;
@@ -50,7 +50,7 @@ function reverseBetween(head, left, right) {
 
 /**
  * I have to know where I am starting in the reverse and where i end.
- * move a pointer to the right position
- * reverse between left and right
+ * prev - point the node before left.
+ * traverse the list to reverse between left and right
  * then reconnect the reverse section to the rest.
  */
