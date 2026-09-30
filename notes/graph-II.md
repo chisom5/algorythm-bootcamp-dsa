@@ -236,6 +236,9 @@ Topological order is useful in a directed acyclic graph. a directed graph that h
 
 when doing topological sort using:
 
-- DFS -> 3 state + Postorder
+- DFS topological sort -> DFS + 3 state cycle detection + Postorder
 
-- BFS -> Indegree + queue
+- BFS topological sort ->  Indegree + queue
+
+
+DFS can construct a topological order by recording when each vertex finishes. keeping the same 3 states so that a directed cycle is still detected.

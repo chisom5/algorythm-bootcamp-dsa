@@ -5,6 +5,7 @@
  * using DFS for topological sort. (DFS + 3 state), when it process every outgoing neighbour, append to the order list.
  **/
 
+// recursive way
 function courseScheduleII(numCourses, prerequisites) {
   // build graph
   const graph = Array.from({ length: numCourses }, () => []);
@@ -29,9 +30,53 @@ function courseScheduleII(numCourses, prerequisites) {
     return true;
   }
 
-  for(let i = 0; i < numCourses; i++){
-    if(state[i] === 0 && !dfs(i)) return [];
+  for (let i = 0; i < numCourses; i++) {
+    if (state[i] === 0 && !dfs(i)) return [];
   }
 
   return order.reverse();
 }
+
+// iterative way
+function courseScheduleII(numCourses, prerequisites) {
+  // build graph
+  const graph = Array.from({ length: numCourses }, () => []);
+  for (let [u, v] of prerequisites) {
+    graph[v].push(u);
+  }
+
+  const state = new Array(numCourses).fill(0);
+  let order = [];
+
+  for (let i = 0; i < numCourses; i++) {
+    if (state[i] !== 0) continue;
+
+    let stack = [i];
+
+    while (stack.length) {
+      let node = stack[stack.length - 1];
+
+      if (state[node] === 0) {
+        stack[node] = 1;
+        
+        for (let nbr of graph[node]) {
+          if (state[nbr] === 1) return null; // cycle.
+
+          if (state[nbr] === 0) {
+            stack.push(nbr);
+          }
+        }
+      }else if(state[node] === 1){
+        state[node] = 2;
+        stack.pop();
+        order.push(node);
+      }else{
+        stack.pop();
+      }
+
+    }
+  }
+
+  return order.reverse();
+}
+
