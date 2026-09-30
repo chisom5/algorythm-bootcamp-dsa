@@ -38,7 +38,7 @@ function sumMenuScoresInBand(restaurantMenu, minScore, maxScore) {
   const queue = [restaurantMenu];
   let front = 0;
 
-  while (queue.length) {
+  while (front < queue.length) {
     let node = queue[front++];
 
     // within range

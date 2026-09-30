@@ -242,3 +242,7 @@ when doing topological sort using:
 
 
 DFS can construct a topological order by recording when each vertex finishes. keeping the same 3 states so that a directed cycle is still detected.
+
+#### InDegree measures unfinished prerequisites
+
+Indegree of a vertices is the number of edges directed into it. Kahn’s algorithm builds a topological order by repeatedly selecting a vertex with no remaining incoming requirements.
