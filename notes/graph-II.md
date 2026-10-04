@@ -194,7 +194,7 @@ function can_finish(num_courses, prerequisites) {
     return true;
   }
 
-// check all component inlcuding disconnected component.
+  // check all component inlcuding disconnected component.
   for (let i = 0; i < num_courses; i++) {
     if (state[i] === 0 && !dfs(i)) {
       return false;
@@ -205,20 +205,20 @@ function can_finish(num_courses, prerequisites) {
 }
 ```
 
-N.B: Specific keywords, relationship patterns, and structural characteristics that determine the kind of graph problem 
+N.B: Specific keywords, relationship patterns, and structural characteristics that determine the kind of graph problem
 
-1. One-way relationship: 
-Keywords - like "A leads to B", "A points to B", "A transfers to B", "one-way street", "can only move from X to Y".
+1. One-way relationship:
+   Keywords - like "A leads to B", "A points to B", "A transfers to B", "one-way street", "can only move from X to Y".
 
 Hint - is a directed graph
 
 2. Order Requirement:
-Keywords - "Prerequisites", "Task A must be completed before Task B", "Precedence", "Dependency tree/graph", "Build order", "Compilation order".
+   Keywords - "Prerequisites", "Task A must be completed before Task B", "Precedence", "Dependency tree/graph", "Build order", "Compilation order".
 
 Hint - Topological Sort or 3 - state DFS.
 
 3. Explicit Edge Format in Input:
-Keywords - "array pair order, if the problem specify that in [u, v], the order matters: "An edge [a, b] means course b is a prerequisite for course a."
+   Keywords - "array pair order, if the problem specify that in [u, v], the order matters: "An edge [a, b] means course b is a prerequisite for course a."
 
 Hinit - Adjacency list must represent entry as graph[u] = [v]
 
@@ -238,11 +238,55 @@ when doing topological sort using:
 
 - DFS topological sort -> DFS + 3 state cycle detection + Postorder
 
-- BFS topological sort ->  Indegree + queue
-
+- BFS topological sort -> Indegree + queue (Khan’s algorithm)
 
 DFS can construct a topological order by recording when each vertex finishes. keeping the same 3 states so that a directed cycle is still detected.
 
 #### InDegree measures unfinished prerequisites
 
 Indegree of a vertices is the number of edges directed into it. Kahn’s algorithm builds a topological order by repeatedly selecting a vertex with no remaining incoming requirements.
+
+Kahn’s algorithm builds a topological order by repeatedly removing nodes with an in-degree of 0 (nodes with no incoming dependencies).
+
+The steps:
+
+- Compute the in-degree (number of incoming edges) for every vertex
+
+- Initialize a queue with all vertices of in-degree 0
+
+- While the queue is not empty, remove a vertex from the queue, add it to the topological order, and decrease the in-degree of its neighbors. If any neighbor's in-degree becomes 0, add it to the queue.
+
+- If the topological order contains all vertices, the graph is a DAG (Directed Acyclic Graph). If not, it contains a cycle.
+
+```js
+function topologicalSortKahn(numVertices, edges) {
+  const graph = Array.from({ length: numVertices }, () => []);
+  const indegree = new Array(numVertices).fill(0);
+
+  // build adjacency list.
+  for (let [u, v] of edges) {
+    graph[v].push(u);
+    indegree[u]++; // calculate indegree
+  }
+
+  let queue = [];
+
+  for (let i = 0; i < numVertices; i++) {
+    if (indegree[i] === 0) queue.push(i);
+  }
+  let front = 0;
+  let count = 0;
+
+  while (front < queue.length) {
+    const node = queue[front++];
+    count++;
+
+    for (let nbr of graph[node]) {
+      indegree[nbr]--;
+      if (indegree[nbr] === 0) queue.push(nbr);
+    }
+  }
+
+  return count === numVertices; // if count is equal to numVertices, then the graph is a DAG (Directed Acyclic Graph) and a topological order exists. Otherwise, it contains a cycle.
+}
+```
