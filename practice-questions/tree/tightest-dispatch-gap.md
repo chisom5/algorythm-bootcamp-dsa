@@ -1,6 +1,6 @@
 # Tightest Dispatch Gap
 
-## Problem
+## Problem Statement
 A fleet dispatch system stores shipment priority codes in a routing tree: codes below a checkpoint appear on its left side and higher codes on its right. Each checkpoint represents one shipment waiting for a dock.
 
 Determine the smallest numeric gap between the codes of any two different shipments. This identifies shipments that are nearly identical in urgency and may compete for the same loading window.

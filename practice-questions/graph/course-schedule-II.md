@@ -1,6 +1,6 @@
 # Course Schedule II
 
-## Problem
+## Problem Statement
 
 Given a total of numCourses courses you have to take, labeled from 0 to numCourses - 1. You are given an array prerequisites where prerequisites[i] = [a_i, b_i] indicates that you must take course b_i first if you want to take course a_i.
 

@@ -303,3 +303,12 @@ Weighted path problems are a generalization of unweighted path problems. In an u
 
 Each questions requires different information from the graph. A signal can reach the same server along several routes. We want the route with the smallest total delay: the sum of its edge weights. Counting edges is insufficient when their delays differ. We can use Dijkstra’s algorithm to find the shortest path in a weighted graph with non-negative weights, where there is single source. For graphs with negative weights, we can use the Bellman-Ford algorithm. multi-source BFS to model simultaneous spread, and Union-Find to maintain connected groups. 
 
+The ordinary BFS from Graphs I finds a path with the fewest edges. That also minimizes cost when every edge has the same positive cost. When costs differ, its first discovery of a vertex need not be the cheapest route to that vertex.
+
+#### Dijkstra’s algorithm
+
+Dijkstra’s algorithm finds the minimum cost from one source to every reachable vertex when all edge weights are nonnegative. It maintains a priority queue of vertices to explore, prioritized by the current known cost to reach them. The algorithm repeatedly extracts the vertex with the lowest cost, updates the costs of its neighbors, and continues until all reachable vertices have been processed.
+
+#### Priority Queue
+
+A priority queue stores entries with a key called a priority.  A minimum priority queue removes the entry with the smallest key, regardless of when that entry was inserted. This differs from a FIFO queue, which removes the oldest entry.

@@ -1,6 +1,6 @@
 # Menu Score Within Budget Band
 
-## Problem
+## Problem Statement
 
 A delivery platform stores each restaurant's menu in a ranked decision tree. Every dish score is larger than every score in its left branch and smaller than every score in its right branch, so the kitchen can quickly narrow where to look.
 

@@ -1,6 +1,6 @@
 # Minimum Knight Moves
 
-## Problem
+## Problem Statement
 
 In a standard game of chess played on an 8 x 8 chessboard, a Knight moves in an 'L' shape: two squares in one direction and one square perpendicular, or one square in one direction and two squares perpendicular.
 

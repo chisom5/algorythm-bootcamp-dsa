@@ -1,6 +1,6 @@
 # Size of the Largest Server Cluster
 
-## Problem
+## Problem Statement
 
 You are managing a data center represented as a network of N servers, labeled from 0 to N - 1.
 
