@@ -58,7 +58,7 @@ function courseScheduleII(numCourses, prerequisites) {
 
       if (state[node] === 0) {
         stack[node] = 1;
-        
+
         for (let nbr of graph[node]) {
           if (state[nbr] === 1) return null; // cycle.
 
@@ -66,17 +66,47 @@ function courseScheduleII(numCourses, prerequisites) {
             stack.push(nbr);
           }
         }
-      }else if(state[node] === 1){
+      } else if (state[node] === 1) {
         state[node] = 2;
         stack.pop();
         order.push(node);
-      }else{
+      } else {
         stack.pop();
       }
-
     }
   }
 
   return order.reverse();
 }
 
+// topological sort
+function courseScheduleII(numCourses, prerequisites) {
+  const graph = Array.from({ length: numCourses }, () => []);
+  const indegree = new Array(numCourses).fill(0);
+
+  // build graph and indegree
+  for (let [u, v] of prerequisites) {
+    graph[v].push(u);
+    indegree[u]++;
+  }
+
+  const queue = [];
+  let front = 0;
+  let order = [];
+
+  for (let i = 0; i < numCourses; i++) {
+    if (indegree[i] === 0) queue.push(i);
+  }
+
+  while (front < queue.length) {
+    let node = queue[front++];
+    order.push(node);
+
+    for (let nbr of graph[node]) {
+      indegree[nbr]--;
+      if (indegree[nbr] === 0) queue.push(nbr);
+    }
+  }
+
+  return order.length !== numCourses ? [] : order;
+}

@@ -290,3 +290,16 @@ function topologicalSortKahn(numVertices, edges) {
   return count === numVertices; // if count is equal to numVertices, then the graph is a DAG (Directed Acyclic Graph) and a topological order exists. Otherwise, it contains a cycle.
 }
 ```
+
+#### Weighted Path 
+
+Weighted path problems are a generalization of unweighted path problems. In an unweighted graph, the shortest path is determined by the number of edges. In a weighted graph, each edge has a weight (or cost), and the shortest path is determined by the sum of the weights along the path. Weighted path ask 3 questions:
+
+1. What is the cheapest route?
+
+2. How long does spread take from several starting points?
+
+3. Which vertices are connected as new edges arrive?
+
+Each questions requires different information from the graph. A signal can reach the same server along several routes. We want the route with the smallest total delay: the sum of its edge weights. Counting edges is insufficient when their delays differ. We can use Dijkstra’s algorithm to find the shortest path in a weighted graph with non-negative weights, where there is single source. For graphs with negative weights, we can use the Bellman-Ford algorithm. multi-source BFS to model simultaneous spread, and Union-Find to maintain connected groups. 
+
