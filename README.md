@@ -32,8 +32,11 @@ The goal is instinct. By the end of the program, when you see a problem you'll r
 - Week 06 : Tree II
 - Week 07 : Graph I
 - Week 08 : Graph II
+- Week 09 : Dynamic Programming I
+- Week 10 : Dynamic Programming II
+- Week 11 : Greedy Algorithms & Backtracking
 
-## Week Details (first 4 weeks)
+## Week Details 
 
 - Week 01 — Big O, Binary Search & Hashmap
   - Topics: Time/space complexity, best/avg/worst cases, binary search implementation and variants, hashmap fundamentals
@@ -65,7 +68,7 @@ The goal is instinct. By the end of the program, when you see a problem you'll r
 
 - Week 08 - Graph II
  - Topics: Cycle detection in directed graphs,  topological sort, Dijkstra's algorithm, union find, Minimum spanning trees
-   - Goals: detect cycles,  perform topological sorting
+   - Goals: detect cycles,  perform topological sorting, Dijkstra's algorithm for shortest path, implement union-find data structure.
    
 ## Resources
 
