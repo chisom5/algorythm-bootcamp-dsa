@@ -305,7 +305,7 @@ Each questions requires different information from the graph. A signal can reach
 
 The ordinary BFS from Graphs I finds a path with the fewest edges. That also minimizes cost when every edge has the same positive cost. When costs differ, its first discovery of a vertex need not be the cheapest route to that vertex.
 
-#### Dijkstra’s algorithm 
+#### Dijkstra’s algorithm
 
 Dijkstra’s algorithm finds the minimum cost from one source to every reachable vertex when all edge weights are nonnegative. It maintains a priority queue of vertices to explore, prioritized by the current known cost to reach them. The algorithm repeatedly extracts the vertex with the lowest cost, updates the costs of its neighbors, and continues until all reachable vertices have been processed.
 
@@ -490,7 +490,7 @@ function getShortestPathDW(edges, n, source) {
 }
 ```
 
-#### Shortest path in DAG 
+#### Shortest path in DAG
 
 Topological sort + Relaxation:
 
@@ -499,7 +499,7 @@ To find shortest path in a directed acyclic graph (DAG), we can use topological 
 ```js
 /**
  * Shortest path in a DAG using Topological Sort (Kahn's Algorithm BFS)
- * 
+ *
  * @param {number} numNodes - Total number of nodes (0-indexed: 0 to numNodes - 1)
  * @param {number[][]} edges - Array of directed weighted edges [u, v, weight]
  * @param {number} source - Starting node
@@ -528,7 +528,7 @@ function dagShortestPath(numNodes, edges, source) {
     const node = queue.shift();
     topoOrder.push(node);
 
-    for (const [nbr] of graph[node]) {
+    for (const [nbr, weight] of graph[node]) {
       inDegree[nbr]--;
       if (inDegree[nbr] === 0) {
         queue.push(nbr);
@@ -555,3 +555,45 @@ function dagShortestPath(numNodes, edges, source) {
   return dist;
 }
 ```
+
+#### Multi-source BFS
+
+Multi-source BFS is a variant of the standard BFS algorithm that allows for simultaneous exploration from multiple starting points. This is particularly useful in scenarios where we want to find the shortest distance from several sources to all other vertices in an unweighted graph.
+
+Multi-source BFS starts by placing every source in the same queue with distance 0. Then it performs the usual BFS expansion.
+
+```js
+function multiSourceBFS(edges, n, sources) {
+  const graph = Array.from({ length: n }, () => []);
+  for (const [u, v] of edges) {
+    graph[u].push(v);
+    graph[v].push(u); // Assuming undirected graph
+  }
+
+  const dist = new Array(n).fill(Infinity);
+  const queue = [];
+
+  // Initialize the queue with all sources
+  for (const source of sources) {
+    dist[source] = 0;
+    queue.push(source);
+  }
+
+  let front = 0;
+
+  while (front < queue.length) {
+    const node = queue[front++];
+    for (const nbr of graph[node]) {
+      if (dist[nbr] === Infinity) {
+        // Not visited yet
+        dist[nbr] = dist[node] + 1;
+        queue.push(nbr);
+      }
+    }
+  }
+
+  return dist;
+}
+```
+
+N.B: whenever a grid/graph problem involves multiple starting points, or multiple simultaneous starting points spreading at once, we can use multi-source BFS to solve it.
