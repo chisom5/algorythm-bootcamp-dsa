@@ -3,6 +3,7 @@
  * @param {number[][]} loadingRules
  * @returns {boolean}
  */
+// khan's algorithm
 function canClearFulfillmentPlan(shipmentCount, loadingRules) {
   const graph = Array.from({ length: shipmentCount }, () => []);
   const indegree = new Array(shipmentCount).fill(0);

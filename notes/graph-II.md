@@ -291,7 +291,7 @@ function topologicalSortKahn(numVertices, edges) {
 }
 ```
 
-#### Weighted Path 
+#### Weighted Path
 
 Weighted path problems are a generalization of unweighted path problems. In an unweighted graph, the shortest path is determined by the number of edges. In a weighted graph, each edge has a weight (or cost), and the shortest path is determined by the sum of the weights along the path. Weighted path ask 3 questions:
 
@@ -301,7 +301,7 @@ Weighted path problems are a generalization of unweighted path problems. In an u
 
 3. Which vertices are connected as new edges arrive?
 
-Each questions requires different information from the graph. A signal can reach the same server along several routes. We want the route with the smallest total delay: the sum of its edge weights. Counting edges is insufficient when their delays differ. We can use Dijkstra’s algorithm to find the shortest path in a weighted graph with non-negative weights, where there is single source. For graphs with negative weights, we can use the Bellman-Ford algorithm. multi-source BFS to model simultaneous spread, and Union-Find to maintain connected groups. 
+Each questions requires different information from the graph. A signal can reach the same server along several routes. We want the route with the smallest total delay: the sum of its edge weights. Counting edges is insufficient when their delays differ. We can use Dijkstra’s algorithm to find the shortest path in a weighted graph with non-negative weights, where there is single source. For graphs with negative weights, we can use the Bellman-Ford algorithm. multi-source BFS to model simultaneous spread, and Union-Find to maintain connected groups.
 
 The ordinary BFS from Graphs I finds a path with the fewest edges. That also minimizes cost when every edge has the same positive cost. When costs differ, its first discovery of a vertex need not be the cheapest route to that vertex.
 
@@ -311,4 +311,181 @@ Dijkstra’s algorithm finds the minimum cost from one source to every reachable
 
 #### Priority Queue
 
-A priority queue stores entries with a key called a priority.  A minimum priority queue removes the entry with the smallest key, regardless of when that entry was inserted. This differs from a FIFO queue, which removes the oldest entry.
+A priority queue stores entries with a key called a priority. A minimum priority queue removes the entry with the smallest key, regardless of when that entry was inserted. This differs from a FIFO queue, which removes the oldest entry.
+
+- Min Heap operations:
+
+```js
+class MinHeap {
+  constructor(entries = []) {
+    this.items = [];
+    for (const entry of entries) this.push(entry);
+  }
+
+  get size() {
+    return this.items.length;
+  }
+
+  less(a, b) {
+    return a[0] < b[0] || (a[0] === b[0] && a[1] < b[1]);
+  }
+
+  push(entry) {
+    const heap = this.items;
+    heap.push(entry);
+    let index = heap.length - 1;
+    while (index > 0) {
+      const parent = Math.floor((index - 1) / 2);
+      if (!this.less(heap[index], heap[parent])) break;
+      [heap[index], heap[parent]] = [heap[parent], heap[index]];
+      index = parent;
+    }
+  }
+  pop() {
+    if (this.items.length === 0) throw new Error("Heap is empty");
+    const heap = this.items;
+    const minimum = heap[0];
+    const last = heap.pop();
+    if (heap.length > 0) {
+      heap[0] = last;
+      let index = 0;
+      while (true) {
+        const left = 2 * index + 1;
+        const right = left + 1;
+        let smallest = index;
+        if (left < heap.length && this.less(heap[left], heap[smallest]))
+          smallest = left;
+        if (right < heap.length && this.less(heap[right], heap[smallest]))
+          smallest = right;
+        if (smallest === index) break;
+        [heap[index], heap[smallest]] = [heap[smallest], heap[index]];
+        index = smallest;
+      }
+    }
+    return minimum;
+  }
+}
+
+const heap = new MinHeap();
+for (const entry of [
+  [5, 2],
+  [1, 3],
+  [3, 1],
+  [1, 0],
+]) {
+  heap.push(entry);
+}
+
+const popped = [];
+while (heap.size > 0) {
+  popped.push(heap.pop());
+}
+```
+
+Dijkstra's algorithm Steps:
+
+1. After building the mini priority queue, we build the adjacency list of the graph. The adjacency list is a representation of the graph where each vertex has a list of its neighbors and the corresponding edge weights.
+
+2. We initialize a distance array to keep track of the minimum cost to reach each vertex from the source. The distance to the source itself is set to 0, while all other vertices are initialized to infinity.
+
+3. We push the source vertex into the priority queue with a cost of 0.
+
+4. While the priority queue is not empty, we pop the vertex with the smallest cost. If this cost is greater than the recorded distance for that vertex, we skip processing it.
+
+5. For each neighbor of the current vertex, we calculate the new cost to reach that neighbor through the current vertex. If this new cost is less than the recorded distance for that neighbor, we update the distance and push the neighbor into the priority queue with the new cost.
+
+6. After processing all vertices, we return the distance array, which contains the minimum cost to reach each vertex from the source.
+
+```js
+class MinPriorityQueue {
+  constructor() {
+    this.heap = [];
+  }
+  push(val) {
+    this.heap.push(val);
+    this._up(this.heap.length - 1);
+  }
+
+  pop() {
+    if (this.heap.length === 1) return this.heap.pop();
+
+    const top = this.heap[0];
+    this.heap[0] = this.heap.pop();
+    this._down(0);
+    return top;
+  }
+
+  _Empty() {
+    return this.heap.length === 0;
+  }
+
+  // bubble up
+  _up(index) {
+    while (index > 0) {
+      const parent = Math.floor((index - 1) / 2);
+
+      // if the distance of the parent node is less than the current node distance.
+      if (this.heap[parent][1] <= this.heap[index][1]) break;
+
+      // swap
+      [this.heap[parent], this.heap[index]] = [
+        this.heap[index],
+        this.heap[parent],
+      ];
+
+      index = parent;
+    }
+  }
+  // bubble down
+  _down(index) {
+    while (2 * index + 1 < this.heap.length) {
+      let left = 2 * index + 1,
+        right = 2 * index + 2,
+        min = left;
+
+      // if i can get the smaller distance at the right, set min to be right.
+      if (right < this.heap.length && this.heap[right][1] < this.heap[left][1])
+        min = right;
+
+      // check if the current node distance is smaller than the min distance
+      if (this.heap[index][1] <= this.heap[min][1]) break;
+
+      // swap
+      [this.heap[index], this.heap[min]] = [this.heap[min], this.heap[index]];
+
+      index = min;
+    }
+  }
+}
+
+function getShortestPathDW(edges, n, source) {
+  // build adjacency list
+  const graph = Array.from({ length: n }, () => []);
+  for (let [u, v, w] of edges) {
+    graph[u].push([v, w]);
+  }
+
+  // distance array
+  const dist = new Array(n).fill(Infinity);
+  dist[source] = 0;
+
+  //  push source vertex into the priority queue.
+  const pq = new MinPriorityQueue();
+  pq.push([source, 0]);
+
+  while (!pq._Empty()) {
+    const [u, d] = pq.pop();
+
+    if (d > dist[u]) continue;
+
+    for (let [v, w] of graph[u]) {
+      if (dist[u] + w > dist[v]) {
+        dist[v] = dist[u] + w;
+        pq.push([v, dist[v]]);
+      }
+    }
+  }
+
+  return dist;
+}
+```
