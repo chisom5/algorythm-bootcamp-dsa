@@ -583,6 +583,7 @@ function multiSourceBFS(edges, n, sources) {
 
   while (front < queue.length) {
     const node = queue[front++];
+    
     for (const nbr of graph[node]) {
       if (dist[nbr] === Infinity) {
         // Not visited yet

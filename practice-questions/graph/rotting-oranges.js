@@ -4,7 +4,7 @@ function oranges_rotting(grid) {
 
   const directions = [
     [-1, 0],
-    [0, 1],
+    [1, 0],
     [0, -1],
     [0, 1],
   ]; // 4 directions (up, down, left, right)
@@ -31,7 +31,7 @@ function oranges_rotting(grid) {
   let head = 0;
 
   while (head < queue.length) {
-    const [r, c, d] = queue.pop();
+    const [r, c, d] = queue[head++];
 
     minuteElapsed = d;
 

@@ -83,6 +83,7 @@ function networkDelayTime(moderationRoutes, profileCount, startingProfile) {
   const pq = new MinPriorityQueue();
   pq.push([startingProfile, 0]);
 
+  // perform bfs
   while (!pq._Empty()) {
     const [node, d] = pq.pop();
 
