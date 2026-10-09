@@ -84,13 +84,13 @@ function networkDelayTime(moderationRoutes, profileCount, startingProfile) {
   pq.push([startingProfile, 0]);
 
   while (!pq._Empty()) {
-    const [u, d] = pq.pop();
+    const [node, d] = pq.pop();
 
-    if (d > dist[u]) continue;
+    if (d > dist[node]) continue;
 
-    for (let [v, w] of graph[u]) {
-      if (dist[u] + w > dist[v]) {
-        dist[v] = dist[u] + w;
+    for (let [v, w] of graph[node]) {
+      if (dist[node] + w > dist[v]) {
+        dist[v] = dist[node] + w;
         pq.push([v, dist[v]]);
       }
     }

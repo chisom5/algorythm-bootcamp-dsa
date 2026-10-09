@@ -429,7 +429,7 @@ function countGridComponentsBFS(grid) {
 }
 ```
 
-#### BFS find Shortest Path
+#### BFS find Shortest Path in Undirected Graph
 
 In an unweighted graph, BFS visits vertices in order of distance from the start. All vertices at start distance are processed before any at other distance, and so on. Therefore the first time BFS reaches a vertex, it has reached it along a shortest path.
 

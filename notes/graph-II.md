@@ -305,7 +305,7 @@ Each questions requires different information from the graph. A signal can reach
 
 The ordinary BFS from Graphs I finds a path with the fewest edges. That also minimizes cost when every edge has the same positive cost. When costs differ, its first discovery of a vertex need not be the cheapest route to that vertex.
 
-#### Dijkstra’s algorithm
+#### Dijkstra’s algorithm 
 
 Dijkstra’s algorithm finds the minimum cost from one source to every reachable vertex when all edge weights are nonnegative. It maintains a priority queue of vertices to explore, prioritized by the current known cost to reach them. The algorithm repeatedly extracts the vertex with the lowest cost, updates the costs of its neighbors, and continues until all reachable vertices have been processed.
 
@@ -482,6 +482,72 @@ function getShortestPathDW(edges, n, source) {
       if (dist[u] + w > dist[v]) {
         dist[v] = dist[u] + w;
         pq.push([v, dist[v]]);
+      }
+    }
+  }
+
+  return dist;
+}
+```
+
+#### Shortest path in DAG 
+
+Topological sort + Relaxation:
+
+To find shortest path in a directed acyclic graph (DAG), we can use topological sorting. The idea is to perform a topological sort of the vertices and then relax the edges in the order of the topological sort. This ensures that we process each vertex only after all its predecessors have been processed, allowing us to find the shortest path efficiently.
+
+```js
+/**
+ * Shortest path in a DAG using Topological Sort (Kahn's Algorithm BFS)
+ * 
+ * @param {number} numNodes - Total number of nodes (0-indexed: 0 to numNodes - 1)
+ * @param {number[][]} edges - Array of directed weighted edges [u, v, weight]
+ * @param {number} source - Starting node
+ * @returns {number[]} Array of shortest distances from source to all nodes
+ */
+function dagShortestPath(numNodes, edges, source) {
+  // 1. Build Adjacency List and Indegree Array
+  const graph = Array.from({ length: numNodes }, () => []);
+  const inDegree = new Array(numNodes).fill(0);
+
+  for (const [u, v, weight] of edges) {
+    graph[u].push([v, weight]);
+    inDegree[v]++;
+  }
+
+  // 2. Topological Sort using Kahn's Algorithm (BFS)
+  const queue = [];
+  for (let i = 0; i < numNodes; i++) {
+    if (inDegree[i] === 0) {
+      queue.push(i);
+    }
+  }
+
+  const topoOrder = [];
+  while (queue.length > 0) {
+    const node = queue.shift();
+    topoOrder.push(node);
+
+    for (const [nbr] of graph[node]) {
+      inDegree[nbr]--;
+      if (inDegree[nbr] === 0) {
+        queue.push(nbr);
+      }
+    }
+  }
+
+  // 3. Initialize Distances
+  const dist = new Array(numNodes).fill(Infinity);
+  dist[source] = 0;
+
+  // 4. Relax Edges in Topological Order
+  for (const u of topoOrder) {
+    // Only process reachable nodes
+    if (dist[u] !== Infinity) {
+      for (const [v, weight] of graph[u]) {
+        if (dist[u] + weight < dist[v]) {
+          dist[v] = dist[u] + weight;
+        }
       }
     }
   }
