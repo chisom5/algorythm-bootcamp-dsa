@@ -583,7 +583,7 @@ function multiSourceBFS(edges, n, sources) {
 
   while (front < queue.length) {
     const node = queue[front++];
-    
+
     for (const nbr of graph[node]) {
       if (dist[nbr] === Infinity) {
         // Not visited yet
@@ -598,3 +598,86 @@ function multiSourceBFS(edges, n, sources) {
 ```
 
 N.B: whenever a grid/graph problem involves multiple starting points, or multiple simultaneous starting points spreading at once, we can use multi-source BFS to solve it.
+
+#### Connectivity as edges arrive: DSU (Disjoint Set Union) or Union-Find
+
+<!-- Imagine a social network where users can become friends over time. We want to answer queries like "Are user A and user B connected?" as new friendships (edges) are formed. The Disjoint Set Union (DSU) or Union-Find data structure is perfect for this scenario. It efficiently manages and merges connected components, allowing us to quickly determine if two vertices are in the same component. -->
+
+Imagine adding undirected links to a network one at a time. After each addition, you may need to ask whether two vertices already belong to the same connected group. A newly proposed edge can either join two separate groups or connect vertices that already have a path between them.
+
+DFS and BFS can answer a connectivity query by searching the current graph. Repeating a full traversal after many edge additions may repeat substantial work. But with a union-find data structure, each edge addition can be processed in nearly constant time. Each vertex belongs to a group represented by a single root vertex. The find operation returns the root of a vertex’s group. The union operation merges two groups by making one root point to the other.
+
+- Disjoint Sets: are group that do not overlap. Every vertex belongs to exactly one set. In an undirected graph, the connected components form such a collection: two components cannot share a vertex.
+
+- Union-Find: chooses one member of each set as its representative. To test whether two vertices share a set, compare their representatives: find(a) == find(b).
+
+#### Find a representative
+
+Find(x) follows parent pointers until it reaches a root. For the chain 4 → 3 → 1, with parent[1] = 1, the representative of 4 is 1.
+
+```js
+class dsu {
+  constructor(n) {
+    this.parent = Array.from({ length: n }, (_, i) => i);
+  }
+
+  find(x) {
+    if (this.parent[x] !== x) {
+      this.parent[x] = this.find(this.parent[x]); // path compression
+    }
+    return this.parent[x];
+  }
+}
+```
+
+The code uses path halving, one form of path compression. While the current vertex is not a root, set its parent to its grandparent: parent[x] = parent[parent[x]]. Then move to that updated parent.
+
+#### Union roots by rank
+
+To merge the sets containing a and b, first find their roots. If the roots are equal, the vertices already share a component. Return false to report that no merge occurred. Otherwise, connect one root to the other root, rather than connecting arbitrary endpoint vertices.
+
+```js
+class dsu {
+  constructor(n) {
+    this.parent = Array.from({ length: n }, (_, i) => i);
+    this.rank = new Array(n).fill(1); // to keep trees balanced during union.
+
+    this.component = n; // to track total number of connectd components.
+  }
+
+  find(x) {
+    if (this.parent[x] === x) return x;
+    return (this.parent[x] = this.find(this.parent[x]));
+  }
+  //or
+  // find(x){
+  //   if(this.parent[x] !== x){
+  //     this.parent[x] = this.find(this.parent[x])
+  //   }
+  //   return this.parent[x];
+  // }
+
+  union(i, j) {
+    let rootI = this.find(i);
+    let rootJ = this.find(j);
+
+    if (rootI === rootJ) return false; // they share a component;
+
+    if (this.rank[rootI] < this.rank[rootJ]) {
+      this.parent[rootI] = rootJ;
+    } else if (this.rank[rootI] > this.rank[rootJ]) {
+      this.parent[rootJ] = rootI;
+    } else {
+      this.parent[rootJ] = rootI;
+      this.rank[rootI]++;
+    }
+
+    this.component--; //successfully merge, reduce the component count;
+    return true;
+  }
+
+  isConnected(i, j) {
+    return this.find(i) === this.find(j);
+  }
+}
+```

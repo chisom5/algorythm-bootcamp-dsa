@@ -12,7 +12,7 @@ The goal is instinct. By the end of the program, when you see a problem you'll r
 
 - Weekly topic + hands-on exercises
 - Live/recorded lectures and Q&A Deep dive
-- Weekly mini-projects and problem sets
+- Weekly assignments 
 - Final capstone project and cumulative review in Week 12
 
 ## Learning Objectives
@@ -34,7 +34,8 @@ The goal is instinct. By the end of the program, when you see a problem you'll r
 - Week 08 : Graph II
 - Week 09 : Dynamic Programming I
 - Week 10 : Dynamic Programming II
-- Week 11 : Greedy Algorithms & Backtracking
+- Week 11 : Greedy Algorithms 
+- Week 12 : Heaps & Priority Queues
 
 ## Week Details 
 
