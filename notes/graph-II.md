@@ -615,6 +615,8 @@ DFS and BFS can answer a connectivity query by searching the current graph. Repe
 
 Find(x) follows parent pointers until it reaches a root. For the chain 4 → 3 → 1, with parent[1] = 1, the representative of 4 is 1.
 
+1. Recursive.
+
 ```js
 class dsu {
   constructor(n) {
@@ -626,6 +628,29 @@ class dsu {
       this.parent[x] = this.find(this.parent[x]); // path compression
     }
     return this.parent[x];
+  }
+  // or
+  find(x) {
+    if (this.parent[x] === x) return x;
+    return (this.parent[x] = this.find(this.parent[x])); // path compression.
+  }
+}
+```
+
+2. Iterative
+
+```js
+class dsu {
+  constructor(n) {
+    this.parent = Array.from({ length: n }, (_, i) => i);
+  }
+
+  find(x) {
+    while (this.parent[x] !== x) {
+      this.parent[x] = this.parent[this.parent[x]];
+      x = this.parent[x];
+    }
+    return x;
   }
 }
 ```
@@ -649,13 +674,6 @@ class dsu {
     if (this.parent[x] === x) return x;
     return (this.parent[x] = this.find(this.parent[x]));
   }
-  //or
-  // find(x){
-  //   if(this.parent[x] !== x){
-  //     this.parent[x] = this.find(this.parent[x])
-  //   }
-  //   return this.parent[x];
-  // }
 
   union(i, j) {
     let rootI = this.find(i);
@@ -676,8 +694,79 @@ class dsu {
     return true;
   }
 
+  // or
+
+  union(i, j) {
+    let rootI = this.find(i);
+    let rootJ = this.find(j);
+
+    if (rootI === rootJ) return false; // they share a component;
+
+    if (this.rank[rootI] < this.rank[rootJ]) {
+      [rootI, rootJ] = [rootJ, rootI]; // swap
+    }
+    this.parent[rootJ] = rootI;
+    if (this.rank[rootI] === this.rank[rootJ]) {
+      this.rank[rootI]++;
+    }
+    return true;
+  }
+
   isConnected(i, j) {
     return this.find(i) === this.find(j);
   }
+}
+```
+
+Question: Execute Redundant Connection using Union-Find
+
+- If the nodes are 1-indexed
+
+```js
+class DsuUnionFind {
+  constructor(n) {
+    this.parent = Array.from({ length: n + 1 }, (_, i) => i);
+    this.rank = new Array(n + 1).fill(1);
+  }
+
+  find(x) {
+    while (this.parent[x] !== x) {
+      this.parent[x] = this.parent[this.parent[x]];
+      x = this.parent[x];
+    }
+    return x;
+  }
+
+  union(i, j) {
+    let rootI = this.find(i);
+    let rootJ = this.find(j);
+
+    if (rootI === rootJ) return false; // they share the same component;
+
+    if (this.rank[rootI] < this.rank[rootJ]) {
+      [rootI, rootJ] = [rootJ, rootI];
+    }
+    this.parent[rootJ] = rootI;
+
+    if (this.rank[rootI] === this.rank[rootJ]) {
+      this.rank[rootI]++;
+    }
+
+    return true;
+  }
+}
+
+function findRedundantConnection(edges) {
+  const n = edges.length;
+  const dsu = new DsuUnionFind(n);
+
+  // build adjacency list
+  for (let [u, v] of edges) {
+    // check dsu union
+    if (!dsu.union(u, v)) {
+      return [u, v];
+    }
+  }
+  return [];
 }
 ```
