@@ -88,6 +88,7 @@ To generate every subset of the distinct values in [1,2,3], using the start-inde
 Once an element at index i is chosen, all future choices must come from index i + 1 onward.
 
 The start_index parameter prevents backward choices (e.g., picking 2 then 1), which would create duplicate combinations like [1, 2] and [2, 1].
+for subset [1, 2] is same as [2, 1].
 
 ```js
 function subsets(nums) {
@@ -193,3 +194,8 @@ return result;
 }
 ```
 
+### Pruning 
+
+Pruning is knowing when to stop. A prune is a logical condition, not a prediction that a branch will probably fail.
+
+It changes how much of the search is explored while preserving the result.
