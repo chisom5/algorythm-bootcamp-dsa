@@ -111,7 +111,7 @@ function subsets(nums) {
 
 Both algorithms generate the same mathematical set of subsets. They organize the recursive calls differently and therefore record answers in different orders. but order doesn't matter as long as the answer is correct.
 
-- Time & Space Complexity : Time O(N * 2^N) where Copying each path into the result list takes O(N) time. and 2^N total subsets for a set of size N.
+- Time & Space Complexity : Time O(N \* 2^N) where Copying each path into the result list takes O(N) time. and 2^N total subsets for a set of size N.
 
 Space - O(N) for the recursion call stack reaches a maximuim depth N.
 
@@ -157,22 +157,20 @@ function permutations(nums) {
 }
 ```
 
-- Time and Space Complexity: Time O(N * N !) where O(N) is for copying each path into the result and N! is for the total permutation.
+- Time and Space Complexity: Time O(N \* N !) where O(N) is for copying each path into the result and N! is for the total permutation.
 
 Space O(N) - the recursion call stack reach a maximium depth
- 
 
 ### Combination
 
 Combination is a subset with a fixed length. just like Subset order doesn't matter,so we use start_index to move strictly forward and prevent duplicate groups. with Combination we only collect solutions only when a specific constraint is met (such as a fixed length k or a target sum), rather than recording every intermediate state.
 
 ```js
-function combination (n, k){
-    const result = [];
+function combination(n, k) {
+  const result = [];
 
-    function backtrack(start, path){
-
-        if(path.length === k){
+  function backtrack(start, path) {
+      if(path.length === k){
             result.push([...path])
             return;
         }
@@ -187,15 +185,40 @@ function combination (n, k){
             // undo
             path.pop();
         }
-
-    }
-backtrack(0, []);
-return result;
+  }
+  backtrack(0, []);
+  return result;
 }
 ```
 
-### Pruning 
+### Pruning
 
 Pruning is knowing when to stop. A prune is a logical condition, not a prediction that a branch will probably fail.
 
 It changes how much of the search is explored while preserving the result.
+
+using pruning on Combination.
+
+```js
+function combine(n, k) {
+  const results = [];
+  const path = [];
+
+  function backtrack(start) {
+    if (path.length === k) {
+      results.push([...path]);
+      return;
+    }
+    const need = k - path.length;
+    for (let i = start; i <= n - need + 1; i++) {
+      path.push(i);
+      backtrack(i + 1);
+      path.pop();
+    }
+    return;
+  }
+
+  backtrack(1);
+  return results;
+}
+```

@@ -4,7 +4,7 @@ function nextWarmerShift(readings) {
   let stack = [];
 
   for (let i = 0; i < readings; i++) {
-    while (stack.length !== 0 && stack[stack.length - 1] < readings[i]) {
+    while (stack.length !== 0 && readings[stack[stack.length - 1]] < readings[i]) {
       let j = stack.pop();
 
       ans[j] = i - j;
