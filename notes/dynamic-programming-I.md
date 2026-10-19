@@ -191,7 +191,7 @@ function combination(n, k) {
 }
 ```
 
-### Pruning
+#### Pruning
 
 Pruning is knowing when to stop. A prune is a logical condition, not a prediction that a branch will probably fail.
 
@@ -222,3 +222,6 @@ function combine(n, k) {
   return results;
 }
 ```
+
+#### Combination Sum
+
