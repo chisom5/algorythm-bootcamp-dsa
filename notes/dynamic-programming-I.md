@@ -225,3 +225,35 @@ function combine(n, k) {
 
 #### Combination Sum
 
+An array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order.
+
+The same number may be chosen from candidates an unlimited number of times.
+
+```js
+function combination_sum(candidates, target) {
+  candidates = [...candidates];
+  candidates.sort((a, b) => a - b);
+  const results = [];
+  const path = [];
+
+  function backtrack(start, remaining) {
+    if (remaining === 0) {
+      results.push([...path]);
+      return;
+    }
+    for (let i = start; i < candidates.length; i++) {
+      if (candidates[i] > remaining) {
+        break;
+      }
+      path.push(candidates[i]);
+      backtrack(i, remaining - candidates[i]);
+      path.pop();
+    }
+    return;
+  }
+  backtrack(0, target);
+  return results;
+}
+```
+
+Here candidate values can be reuse, and it doesn't contain duplicate. e.g candidates =[2,3,6,7] target = 7

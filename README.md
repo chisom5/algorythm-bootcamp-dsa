@@ -72,7 +72,7 @@ The goal is instinct. By the end of the program, when you see a problem you'll r
    - Goals: detect cycles,  perform topological sorting, Dijkstra's algorithm for shortest path, implement union-find data structure.
 
 - Week 09 - Dynamic Programming I
-  - Topics: Memoization, Backtracking, Climbing Stairs, House Robber, Longest Common Subsequence
+  - Topics: Memoization, Backtracking, Pruning, And Top-down Dynamic programming
   - Goals: Identify overlapping subproblems and optimal substructure, implement memoization and tabulation techniques, solve classic DP problems.
 
 - Week 10 - Dynamic Programming II
