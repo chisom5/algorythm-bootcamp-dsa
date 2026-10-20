@@ -26,3 +26,18 @@ Compare the number of codebook arrangements before and after adding one more dis
 
 ## Approach Plan
 
+This question each codebook arrangement contains all its entries, with no extra or missing entry, meaning there is no empty subset and order matters meaning set [1, 2] is distinct from [2, 1]
+
+#### Key Constraints
+
+The constraints that matter most is "All integers in nums are unique. and different orders of the entries count as different arrangements." because this tells me that order matters hence set [1, 2] is distinct from [2, 1] permutation and the input "1 <= nums.length <= 6" is small enough for factorial time (N * N!).
+
+#### Pattern
+
+- Dynamic Programming, permutation
+
+#### Complexity
+
+- Time O(N * N!) = O(N) is the iteration of copying to the result array, while N! - is the total permutation.
+
+- Space O(N)
