@@ -229,6 +229,8 @@ An array of distinct integers candidates and a target integer target, return a l
 
 The same number may be chosen from candidates an unlimited number of times.
 
+- Decreasing State tracking
+
 ```js
 function combination_sum(candidates, target) {
   candidates = [...candidates];
@@ -255,6 +257,31 @@ function combination_sum(candidates, target) {
   return results;
 }
 ```
+- Increasing State tracking
+```js
+function combination_sum(candidates, target) {
+  candidates = [...candidates];
+  candidates.sort((a, b) => a - b);
+  const results = [];
+
+  function dfs(path, start, count) {
+    if (count > target) return;
+
+    if (count === target) {
+      result.push([...path]);
+      return;
+    }
+
+    for (let i = start; i < candidates.length; i++) {
+      path.push(candidates[i]);
+      dfs(path, i, count + candidates[i]);
+      path.pop();
+    }
+  }
+  dfs([], 0, 0);
+  return result;
+}
+```
 
 Here candidate values can be reuse, and it doesn't contain duplicate. e.g candidates =[2,3,6,7] target = 7
 
@@ -265,3 +292,59 @@ A recursive search can list solutions, count them, find a best value, or decide 
 - Generate, Count, Minimize
 
 Suppose a search has two successful completions using three items and one item. A generator returns both paths. A counter adds their contributions, 1 + 1 = 2. A minimum-item solver returns min(3,1) = 1. An existence solver may return true as soon as either completion is found.
+
+- Count : The path which is the subset will be unneccessary because the return value summarizes the completions.
+
+```js
+function count(start, remaining) {
+  if (remaining === 0) return 1;
+  let total = 0;
+  for (let i = start; i < candidates.length; i++) {
+    if (candidates[i] > remaining) break;
+    total += count(i, remaining - candidates[i]);
+  }
+  return total;
+}
+```
+
+- Minimize:
+
+```js
+function minimize(start, remaining) {
+  // Base case: successfully reached the target with 0 extra steps
+  if (remaining === 0) return 0;
+
+  let minCount = Infinity; // Initialize to infinity so any valid count is smaller
+
+  for (let i = start; i < candidates.length; i++) {
+    if (candidates[i] > remaining) break;
+
+    // Recurse to find the min count for the sub-problem
+    let res = minimize(i, remaining - candidates[i]);
+
+    // If the recursive branch found a valid solution (not Infinity)
+    if (res !== Infinity) {
+      // Take the minimum between current min and (sub-result + 1 for current choice)
+      minCount = Math.min(minCount, res + 1);
+    }
+  }
+
+  return minCount;
+}
+```
+
+#### Recursive Search is a useful starting point
+
+Backtracking is a useful starting point when a solution is built through a sequence of choices and the problem asks for many distinct results or imposes constraints on partial choices.
+
+The backtracking method is natural when the required output itself is large.
+
+Signal | What to investigate
+
+- “Return every subset / arrangement / partition” : What one choice is and how to avoid duplicate answers.
+
+- "Count or optimize over many repeated choices". : Whether identical subproblems occur and can be memoized.
+
+- "A small number of independent decisions". : The size of the resulting search tree and output.
+
+- “Such that no two…” or another validity rule". : Whether invalid partial solutions can be rejected early.
