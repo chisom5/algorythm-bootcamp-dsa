@@ -257,3 +257,11 @@ function combination_sum(candidates, target) {
 ```
 
 Here candidate values can be reuse, and it doesn't contain duplicate. e.g candidates =[2,3,6,7] target = 7
+
+#### Change What Search return
+
+A recursive search can list solutions, count them, find a best value, or decide whether any exist. The choices may be the same, but the information produced by a completed branch and the way child results are combined must match the question.
+
+- Generate, Count, Minimize
+
+Suppose a search has two successful completions using three items and one item. A generator returns both paths. A counter adds their contributions, 1 + 1 = 2. A minimum-item solver returns min(3,1) = 1. An existence solver may return true as soon as either completion is found.

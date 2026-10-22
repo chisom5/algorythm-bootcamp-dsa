@@ -17,3 +17,5 @@ function mirrorLedger(portfolio) {
   return portfolio;
 
 }
+
+// without using recursion. invert the tree
