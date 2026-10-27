@@ -34,4 +34,4 @@ The constraints that matter most is "All numbers in nums are unique. and Return 
 
 - Time O(N *\(2^{N}\)) = O(N) is the iteration of copying to the result array, while \(2^{N}\) - is the total subsets.
 
-- Space O(N)
+- Space O(N *\(2^{N}\)) - where O(N) is the auxilary space, for copying to the result array, while O(N!) is the total permutation.

@@ -21,7 +21,7 @@ Constraints:
 
 ## Approach Plan
 
-Input can contain duplicate but our solution or answer must not contain duplicate subsets. to be able to have all duplicate input on one side I need to sort, then if nums[i] is same as nums[i - 1] we skip getting the subset of that value. else every other things is from existing knowledge of subset.
+Input can contain duplicate but our solution or answer must not contain duplicate subsets. to be able to have all duplicate input on one side I need to sort, then if nums[i] is same as nums[i - 1] we skip getting the subset of that value at the same recursion depth. else every other things is from existing knowledge of subset.
 
 #### Key Constraints
 
@@ -33,6 +33,6 @@ The constraints that matter most is "1 <= nums.length <= 10" the upper bound is 
 
 #### Complexity
 
-- Time O(N \* 2^N)
+- Time O(N * 2^N)
 
-- Space O(N)
+- Space O(N * 2^N) - where O(N) is the auxilary space while O(N * 2^N) is the total space including output space.

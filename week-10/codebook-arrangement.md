@@ -40,4 +40,4 @@ The constraints that matter most is "All integers in nums are unique. and differ
 
 - Time O(N * N!) = O(N) is the iteration of copying to the result array, while N! - is the total permutation.
 
-- Space O(N)
+- Space O(N *  N!) - where O(N) is the auxilary space while O(N!) is the total permutation.
