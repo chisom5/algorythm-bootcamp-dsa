@@ -111,9 +111,11 @@ function subsets(nums) {
 
 Both algorithms generate the same mathematical set of subsets. They organize the recursive calls differently and therefore record answers in different orders. but order doesn't matter as long as the answer is correct.
 
-- Time & Space Complexity : Time O(N \* 2^N) where Copying each path into the result list takes O(N) time. and 2^N total subsets for a set of size N.
+- Time & Space Complexity : 
 
-Space - O(N) for the recursion call stack reaches a maximuim depth N.
+Time O(N * 2^N) where Copying each path into the result list takes O(N) time. and 2^N total subsets for a set of size N.
+
+Space - O(N * 2^N), O(N) is the recursion call stack reaches a maximuim depth N. and 2*N the two possible valid subsets
 
 ### Permutation
 
@@ -157,9 +159,11 @@ function permutations(nums) {
 }
 ```
 
-- Time and Space Complexity: Time O(N \* N !) where O(N) is for copying each path into the result and N! is for the total permutation.
+- Time and Space Complexity: 
 
-Space O(N) - the recursion call stack reach a maximium depth
+Time O(N * N!) where O(N) is for copying each path into the result and N! is for the total permutation.
+
+Space O(N * N!) - O(N) is the recursion call stack reach a maximium depth and O(N!) the total permutation 
 
 ### Combination
 
