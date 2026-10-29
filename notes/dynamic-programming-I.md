@@ -111,9 +111,9 @@ function subsets(nums) {
 
 Both algorithms generate the same mathematical set of subsets. They organize the recursive calls differently and therefore record answers in different orders. but order doesn't matter as long as the answer is correct.
 
-- Time & Space Complexity : 
+- Time & Space Complexity :
 
-Time O(N * 2^N) where Copying each path into the result list takes O(N) time. and 2^N total subsets for a set of size N.
+Time O(N \* 2^N) where Copying each path into the result list takes O(N) time. and 2^N total subsets for a set of size N.
 
 Space - O(N * 2^N), O(N) is the recursion call stack reaches a maximuim depth N. and 2*N the two possible valid subsets
 
@@ -159,11 +159,11 @@ function permutations(nums) {
 }
 ```
 
-- Time and Space Complexity: 
+- Time and Space Complexity:
 
-Time O(N * N!) where O(N) is for copying each path into the result and N! is for the total permutation.
+Time O(N \* N!) where O(N) is for copying each path into the result and N! is for the total permutation.
 
-Space O(N * N!) - O(N) is the recursion call stack reach a maximium depth and O(N!) the total permutation 
+Space O(N \* N!) - O(N) is the recursion call stack reach a maximium depth and O(N!) the total permutation
 
 ### Combination
 
@@ -261,7 +261,9 @@ function combination_sum(candidates, target) {
   return results;
 }
 ```
+
 - Increasing State tracking
+
 ```js
 function combination_sum(candidates, target) {
   candidates = [...candidates];
@@ -352,3 +354,32 @@ Signal | What to investigate
 - "A small number of independent decisions". : The size of the resulting search tree and output.
 
 - “Such that no two…” or another validity rule". : Whether invalid partial solutions can be rejected early.
+
+#### Memoization and top-down dynamic programming
+
+In Backtracking we describe a problem as a sequence of choices, wrote recursive calls for the remaining work, and restored shared state when a branch finished. That gives us a correct search. It does not always give us an efficient one.
+
+Different branches may ask for the answer to the same remaining problem. But with Memoization we stores that answer so a later call can reuse it. Top-down dynamic programming uses this approach with a recurrence: a rule that combines answers to smaller states.
+
+- Overlapping subproblems: Occurs when a recursive computation requests the same subproblem more than once.
+
+When we trace fibonacci without a cache: we would notice that there are alot of repeated work. 
+
+```js
+function fibonacci(n) {
+  if (n <= 1) {
+    return n;
+  }
+  let left = fibonacci(n - 1);
+  let right = fibonacci(n - 2);
+  return left + right;
+}
+```
+fibonacci(5) - calls fibonacci(4) and fibonacci(3)
+fibonacci(4) - calls fibonacci(3) and fibonacci(2)
+
+We can see that fibonacci(3) is computed twice.  when we spot overlapping subproblems, you can eliminate redundant calculations using one of two strategies:
+
+1. Top-Down with Memoization: here we keep a cache to store the result of a subproblem the first time we compute it. If we encounter the same subproblem again, we instantly return the cached answer instead of recalculating.
+
+2. Bottom-Up with Tabulation: it means we iteratively build up the solution from the smallest subproblems(the base case) to the target, storing result in an array or table so larger problems can look them up instantly.
