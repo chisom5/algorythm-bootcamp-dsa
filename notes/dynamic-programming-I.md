@@ -383,3 +383,5 @@ We can see that fibonacci(3) is computed twice.  when we spot overlapping subpro
 1. Top-Down with Memoization: here we keep a cache to store the result of a subproblem the first time we compute it. If we encounter the same subproblem again, we instantly return the cached answer instead of recalculating.
 
 2. Bottom-Up with Tabulation: it means we iteratively build up the solution from the smallest subproblems(the base case) to the target, storing result in an array or table so larger problems can look them up instantly.
+
+Memoization can make an incorrect recurrence run faster, but it cannot repair a missing choice or an invalid combination of child answers.
