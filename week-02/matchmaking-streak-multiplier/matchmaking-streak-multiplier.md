@@ -57,4 +57,8 @@ Recursion (Exponentation by Squaring)
 
 1. determine the base case. which is if streak_count is 0 return 1.
 2. if streak is a negative value, we treat it as inverse to use the positive value.
+    let current_multiplier = streak > 0 ? 1 /arena_multiplier : arena_multiplier;
 3. then iterate and compute the result combine multiplier.
+    for(let i = Math.abs(streak_count); i > 0; i = Math.floor(i / 2))
+    if(i % 2 === 1): result *= current_multiplier;
+    current_multiplier *= current_multiplier;

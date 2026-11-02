@@ -1,6 +1,6 @@
 # Big O notation
 
-Is a term use in computer science to decribe the worst-case scenarioof an algorithm complexity in terms of the input size. it provide a way to describe how an algorithm's performance scales as the input size grows.
+Is a term use in computer science to decribe the worst-case scenario of an algorithm complexity in terms of the input size. it provide a way to describe how an algorithm's performance scales as the input size grows.
 
 ## Why Big O
 
@@ -33,7 +33,7 @@ it is our single for loop. even if you loop through half of the list it is still
 
 same thing for a balanced binary search tree O(logn). every node's left subtree holds smaller values and its right subtree holds larger values. That ordering means every comparison lets you discard an entire subtree. Each comparison moves you down exactly one level, so the total comparisons can never exceed the tree's height.
 
-N.B - Skeweed tree - lost it's branching factor hence it will be degenerate into a singlt linked list and the time complexity is O(n). but the best case here is if we are searching for an item in the root. then it will be O(1)
+N.B - Skeweed tree - lost it's branching factor hence it will be degenerate into a single linked list and the time complexity is O(n). but the best case here is if we are searching for an item in the root. then it will be O(1)
 
 - Quadratic time O(n^2) - The operation grows to the square of the input size. it is seen in nested for loop. meaning for each element you iterate over all the other elements.
 
