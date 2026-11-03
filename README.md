@@ -73,7 +73,7 @@ The goal is instinct. By the end of the program, when you see a problem you'll r
 
 - Week 09 - Dynamic Programming I
   - Topics: Memoization, Backtracking, Pruning, And Top-down Dynamic programming
-  - Goals: Identify overlapping subproblems and optimal substructure, implement memoization and tabulation techniques, solve classic DP problems.
+  - Goals: Identify overlapping subproblems and optimal substructure, implement backtracing and memoization techniques, Identify top-down problems and solve classic DP problems.
 
 - Week 10 - Dynamic Programming II
 
