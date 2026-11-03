@@ -385,3 +385,26 @@ We can see that fibonacci(3) is computed twice.  when we spot overlapping subpro
 2. Bottom-Up with Tabulation: it means we iteratively build up the solution from the smallest subproblems(the base case) to the target, storing result in an array or table so larger problems can look them up instantly.
 
 Memoization can make an incorrect recurrence run faster, but it cannot repair a missing choice or an invalid combination of child answers.
+
+- Trace Fibonacci with Memoization
+
+```js
+function fib(n) {
+  const memo = new Map();
+  
+  function helper(k) {
+    if (memo.has(k)) {
+      return memo.get(k);
+    }
+    if (k <= 1) {
+      return k;
+    }
+    const left = helper(k - 1);
+    const right = helper(k - 2);
+    const result = left + right;
+    memo.set(k, result);
+    return result;
+  }
+  return helper(n);
+}
+```

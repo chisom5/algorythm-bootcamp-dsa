@@ -4,7 +4,7 @@
  * @return {number[][]}
  */
 
-function combinationSum2(candidates, target) {
+function combinationSumII(candidates, target) {
   candidates.sort((a, b) => a - b);
 
   let result = [];
