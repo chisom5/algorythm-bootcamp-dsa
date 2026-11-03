@@ -427,3 +427,37 @@ What changes between problems is the effect of taking the item and the informati
 | 5. Delete & Earn | Collect every occurrence of value v; exclude values v − 1 and v + 1. | Apply House Robber to totals grouped by value. |
 
 | 6. Maximum non-adjacent value on a tree | Taking a node forbids its children; skipping it leaves them available. | (node, parent_taken), for a fixed rooted tree. |
+
+```js
+// 2. Circular House Robber
+function circularHouseRobber(nums) {
+  let memo = new Map();
+  if (nums.length === 1) return nums[0];
+  if (nums.length === 2) return Math.max(nums[0], nums[1]);
+
+  function helper(i) {
+    if (i >= nums.length) return 0;
+
+    if (memo.has(i)) return memo.get(i);
+
+    let rob_it = nums[i] + helper(i + 2);
+    let skip_it = helper(i + 1);
+
+    let result = Math.max(rob_it, skip_it);
+    memo.set(i, result);
+    return result;
+  }
+
+  // scenario for picking the first, skip the last
+  let scenario_1 = helper(nums.slice(0, nums.length - 1));
+
+  // skip the first, pick the last
+  let scenario_2 = helper(nums.slice(1));
+
+  return Math.max(scenario_1, scenario_2);
+}
+```
+Just like the House Robber problem, we can use memoization to optimize the recursive solution for the Circular House Robber problem. The key difference is that we need to consider two scenarios: one where we include the first house and exclude the last, and another where we exclude the first house and include the last. By comparing the results of these two scenarios, we can find the maximum amount of money that can be robbed without alerting the police.
+
+- Minimize the number of coins
+
