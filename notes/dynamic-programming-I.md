@@ -363,7 +363,7 @@ Different branches may ask for the answer to the same remaining problem. But wit
 
 - Overlapping subproblems: Occurs when a recursive computation requests the same subproblem more than once.
 
-When we trace fibonacci without a cache: we would notice that there are alot of repeated work. 
+When we trace fibonacci without a cache: we would notice that there are alot of repeated work.
 
 ```js
 function fibonacci(n) {
@@ -375,10 +375,11 @@ function fibonacci(n) {
   return left + right;
 }
 ```
+
 fibonacci(5) - calls fibonacci(4) and fibonacci(3)
 fibonacci(4) - calls fibonacci(3) and fibonacci(2)
 
-We can see that fibonacci(3) is computed twice.  when we spot overlapping subproblems, you can eliminate redundant calculations using one of two strategies:
+We can see that fibonacci(3) is computed twice. when we spot overlapping subproblems, you can eliminate redundant calculations using one of two strategies:
 
 1. Top-Down with Memoization: here we keep a cache to store the result of a subproblem the first time we compute it. If we encounter the same subproblem again, we instantly return the cached answer instead of recalculating.
 
@@ -391,7 +392,7 @@ Memoization can make an incorrect recurrence run faster, but it cannot repair a 
 ```js
 function fib(n) {
   const memo = new Map();
-  
+
   function helper(k) {
     if (memo.has(k)) {
       return memo.get(k);
@@ -408,3 +409,21 @@ function fib(n) {
   return helper(n);
 }
 ```
+
+- Extend take-or-skip reasoning
+
+What changes between problems is the effect of taking the item and the information the child must receive. First define the return value, then determine which choice constraints need to remain in the state.
+
+| Problem         | Effect of taking the Item                                      | State or Reduction       |
+| --------------- | -------------------------------------------------------------- | ------------------------ |
+| 1. House Robber | Add its value; continue at i + 2. Skipping continues at i + 1. | Available suffix index i |
+
+| 2. Circular House Robber | The first and last houses also conflict. | compare two linear House Robber runs: one that skips the first house and one that skips the last. |
+
+| 3. 0/1 knapsack | Add its value, consume its weight, and advance to the next item. | (i, capcity) |
+
+| 4. Subset Sum / Partition | Reduce the target by its value and advance. Each item is available once. | (i, remaining) |
+
+| 5. Delete & Earn | Collect every occurrence of value v; exclude values v − 1 and v + 1. | Apply House Robber to totals grouped by value. |
+
+| 6. Maximum non-adjacent value on a tree | Taking a node forbids its children; skipping it leaves them available. | (node, parent_taken), for a fixed rooted tree. |
