@@ -457,6 +457,7 @@ function circularHouseRobber(nums) {
   return Math.max(scenario_1, scenario_2);
 }
 ```
+
 Just like the House Robber problem, we can use memoization to optimize the recursive solution for the Circular House Robber problem. The key difference is that we need to consider two scenarios: one where we include the first house and exclude the last, and another where we exclude the first house and include the last. By comparing the results of these two scenarios, we can find the maximum amount of money that can be robbed without alerting the police.
 
 - Minimize the number of coins
@@ -491,3 +492,30 @@ function coinChange(coins, amount) {
   return helper(amount);
 }
 ```
+
+The Optimal solution would be to use same logic in a bottom-up dynamic programming approach.
+
+```js
+function coinChange(coins, amount) {
+  let dp = new Array(amount + 1).fill(Infinity);
+
+  dp[0] = 0; // base case: 0 coins needed to make amount 0
+
+  for (let i = 1; i <= amount; i++) {
+    for (let coin of coins) {
+      let res = dp[i - coin];
+
+      if (i >= coin && res !== Infinity) {
+        dp[i] = Math.min(dp[i], res + 1);
+      }
+    }
+  }
+  return dp[amount] === Infinity ? -1 : dp[amount];
+}
+```
+
+#### Summary
+
+This part covers the fundamentals of dynamic programming, backtracking, and memoization. which we explore using top-down dynamic programming: request the target state, recursively obtain the results it needs, and store completed answers for reuse. The call stack determines when each waiting state can continue.
+
+Next, we will explore bottom-up dynamic programming, which uses an explicit table and an evaluation order in which each dependency is already available. It keeps the mathematical meaning of the states while changing how their computation is scheduled.
