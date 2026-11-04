@@ -76,7 +76,7 @@ The goal is instinct. By the end of the program, when you see a problem you'll r
   - Goals: Identify overlapping subproblems and optimal substructure, implement backtracing and memoization techniques, Identify top-down problems and solve classic DP problems.
 
 - Week 10 - Dynamic Programming II
-
+- Topics: 
    
 ## Resources
 
