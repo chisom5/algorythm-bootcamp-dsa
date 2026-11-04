@@ -461,3 +461,33 @@ Just like the House Robber problem, we can use memoization to optimize the recur
 
 - Minimize the number of coins
 
+Given positive integer coin denominations and an unlimited supply of each, find the fewest coins whose values sum to an exact nonnegative target amount. Return −1 when no exact combination exists. The denomination is a coin’s value; the answer is the number of coins, not their total value and not the list of selected coins.
+
+e.g coins = [1, 3, 4], amount = 6, depending on the constraints, this solution can exceed call stack limits.
+
+```js
+function coinChange(coins, amount) {
+  const memo = new Map();
+
+  function helper(remaining) {
+    if (remaining === 0) return 0;
+    if (remaining < 0) return -1;
+
+    if (memo.has(remaining)) return memo.get(remaining);
+
+    let minCoins = Infinity;
+
+    for (let coin of coins) {
+      const res = helper(remaining - coin);
+      if (res >= 0 && res < minCoins) {
+        minCoins = Math.min(minCoins, res + 1); // Include the current coin
+      }
+    }
+
+    const result = minCoins === Infinity ? -1 : minCoins;
+    memo.set(remaining, result);
+    return result;
+  }
+  return helper(amount);
+}
+```
