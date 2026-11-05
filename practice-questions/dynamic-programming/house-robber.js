@@ -2,6 +2,7 @@
  * @param {number[]} nums
  * @return {number}
  */
+// memoization: Top-dowm Dynamic Programming.
 function houseRobber(nums) {
   let memo = new Map();
 
@@ -23,4 +24,27 @@ function houseRobber(nums) {
   }
 
   return helper(0);
+}
+
+
+// Bottom-up Dynamic Programming
+function houseRobber(nums){
+  let n = nums.length;
+
+  if(n === 0){
+    return 0;
+  }
+
+  let dp = new Array(n + 1).fill(0);
+
+  dp[1] = nums[0];
+
+  for(let i= 2; i <=n; i++){
+    let take = nums[i - 1] + dp[i - 2];
+    let skip = dp[i - 1];
+
+    dp[i] = Math.max(take, skip);
+  }
+
+  return dp[n];
 }

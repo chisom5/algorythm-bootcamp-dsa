@@ -42,10 +42,53 @@ dp[i] = dp[i − 1] + dp[i − 2]
 ```
 
 - Base Case: The Empty Route Counts
-  dp[0] = 1: there is one way to reach the ground without climbing, namely the empty sequence of moves. dp[1] = 1: the only way to reach step one is a single one-step move. The empty route is neccessary for recurrence. The route consisting of one two-step move is formed from the empty route at step zero. Thus dp[2] = 1 + 1 = 2.
+
+dp[0] = 1: there is one way to reach the ground without climbing, namely the empty sequence of moves. dp[1] = 1: the only way to reach step one is a single one-step move. The empty route is neccessary for recurrence. The route consisting of one two-step move is formed from the empty route at step zero. Thus dp[2] = 1 + 1 = 2.
 
 ```js
 // base cases
 dp[0] = 1;
 dp[1] = 1;
 ```
+
+- Order: Compute Dependencies First
+
+Each state uses the two smaller indices before it. Once the base cases are ready, compute dp[2], then dp[3], and continue toward dp[n]. so that means our base case is dependencies that need to be ready first. The order of evaluation is from the smallest index to the largest.
+
+The complete Climbing Stairs solution is:
+
+```js
+function climbStairs(n) {
+  if (n <= 1) return 1;
+
+  let dp = new Array(n + 1).fill(0);
+
+  dp[0] = 1;
+  dp[1] = 1;
+
+  for (let i = 2; i <= n; i++) {
+    dp[i] = dp[i - 1] + dp[i - 2];
+  }
+
+  return dp[n];
+}
+```
+
+For Space Optimization on Climbing stairs example. we would use two variable to store the two previous answers rather than using a entire table.
+
+```js
+function climbStairs(n) {
+  if (n <= 1) return 1;
+
+  let prev2 = 1;
+  let prev1 = 1;
+  for (let i = 2; i <= n; i++) {
+    const curr = prev1 + prev2;
+    prev2 = prev1;
+    prev1 = curr;
+  }
+  return prev1;
+}
+```
+
+The recurrence is unchanged. the mathematical relationship is still the same.
