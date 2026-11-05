@@ -74,7 +74,11 @@ function climbStairs(n) {
 }
 ```
 
-For Space Optimization on Climbing stairs example. we would use two variable to store the two previous answers rather than using a entire table.
+### Space Optimization
+
+Uses two prefix state variable in-place of tables.
+
+on Climbing stairs example. we would use two variable to store the two previous answers rather than using a entire table.
 
 ```js
 function climbStairs(n) {
@@ -92,3 +96,28 @@ function climbStairs(n) {
 ```
 
 The recurrence is unchanged. the mathematical relationship is still the same.
+
+Eg. for House robber space optimization uses two prefix total
+
+```js
+function rob(nums) {
+  let prev2 = 0; // hold take 
+  let prev1 = 0; // hold skip
+  for (const x of nums) {
+    const curr = Math.max(prev1, prev2 + x);
+    prev2 = prev1;
+    prev1 = curr;
+  }
+  return prev1;
+}
+```
+
+The transition reads only two prefix totals. Before processing a house, prev1 holds the best total before that house, and prev2 holds the best total excluding its immediate predecessor.
+
+#### 2D Dynamic Programming & Space Optimization
+
+From Bottom-up Dp, we replaced recursive calls with table reads. We defined what each entry meant, initialized the base cases, and chose an order that made every dependency available before it was read.
+
+Now we can transfer this method into grid position problems, a subproblem that need two state variables.
+
+Examples of what we would do here is to count grid paths, minimize a path’s cost, and compare string subsequences. Then we will reduce memory by keeping only the values that later steps still need.
