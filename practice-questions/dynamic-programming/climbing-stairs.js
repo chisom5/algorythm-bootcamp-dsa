@@ -6,8 +6,9 @@
 function climbStairs(n) {
   if (n <= 1) return 1;
 
-  let ways = new Array(n + 1);
+  let ways = new Array(n + 1).fill(0);
 
+  // base case
   ways[1] = 1;
   ways[2] = 2;
 
@@ -36,3 +37,4 @@ function climbStairs(n) {
   }
   return prev1;
 }
+
