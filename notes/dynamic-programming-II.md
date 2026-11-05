@@ -121,3 +121,20 @@ From Bottom-up Dp, we replaced recursive calls with table reads. We defined what
 Now we can transfer this method into grid position problems, a subproblem that need two state variables.
 
 Examples of what we would do here is to count grid paths, minimize a path’s cost, and compare string subsequences. Then we will reduce memory by keeping only the values that later steps still need.
+
+- When state variable is not enough : is If two situations share your proposed state but need different results, the state leaves out information. e.g 
+
+1. a "Grid path" - where is provides both coordinates of a position, then state should account for state(row, col).
+
+2. "Compare two strings" - The information that must be kept is "How much of each string is included" state(i, j).
+
+
+- Reading a 2-Dimensional table.
+
+The first index selects a row; the second selects a column. We write dp[r][c] for the entry at row r, column c. A boundary is an edge of the table where some neighbors do not exist.
+
+N.B: If we have our current element in grid as dp[r][c] - the cell above is dp[r−1][c]. The left cell is dp[r][c−1]. And the diagonal cell dp[r−1][c−1]. Not every algorithm uses all three.
+
+- When 2D Dp is useful
+
+Two-dimensional DP is useful when a decision depends on progress in two directions or two sequences.
