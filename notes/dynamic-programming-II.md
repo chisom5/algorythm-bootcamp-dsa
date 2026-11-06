@@ -138,3 +138,15 @@ N.B: If we have our current element in grid as dp[r][c] - the cell above is dp[r
 - When 2D Dp is useful
 
 Two-dimensional DP is useful when a decision depends on progress in two directions or two sequences.
+
+#### Count Paths across a Grid
+
+A robot starts at the top-left cell of a grid with m rows and n columns. It may move only right or down. Count the distinct paths that reach the bottom-right cell. Assume both dimensions are positive and there are no obstacles.
+
+A path is identified by its sequence of moves. In this grid every valid path uses three right moves and two down moves, but those moves can occur in different orders. ( this is for a 3 x 3 grid).
+
+To reach an interior cell (r,c), the last move came from (r−1,c) or from (r,c−1). Count the ways to reach each predecessor, then add them.
+
+paths(r,c) = paths(r−1,c) + paths(r,c−1)
+
+A recursive solution ask those two smaller questions. Different call branches can ask for the same cell, so a memoized version stores the answer under the pair (r,c). While Tabulation computes each cell once in an appropriate order. keeping the same subproblem meaning as the recursive version.
