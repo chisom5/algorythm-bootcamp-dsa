@@ -210,7 +210,7 @@ function miniumPathSum(grid) {
 
   for (let r = 1; r < m; r++) {
     for (let c = 1; c < n; c++) {
-        dp[r][c] = grid[r][c] + Math.min(dp[r - 1][c], dp[r][ c -1])
+      dp[r][c] = grid[r][c] + Math.min(dp[r - 1][c], dp[r][c - 1]);
     }
   }
 
@@ -219,3 +219,40 @@ function miniumPathSum(grid) {
 ```
 
 The input grid remains unchanged. Create a separate DP table to stores the minimum cost to reach each cell. then we initialize the start, top row, and first column before the interior loops begin.
+
+- Recover The actual path
+
+From the minimum path, we can recover the unique path or route by tracing back. For an interior cell, move to the smaller of the upper and left DP values. On the top row, move left. On the first column, move up. If the two predecessor values tie, either can lead to an optimal path.
+
+```js
+// 1. After doing minimum path
+// 2. recover path or route as
+
+let rows = r - 1,
+  cols = c - 1;
+
+const path = [[rows, cols]];
+
+while (rows > 0 || cols > 0) {
+  if (rows === 0) {
+    // On the top row, we can only move left
+    cols--;
+  } else if (cols === 0) {
+    // On the left column, we can only move up
+    rows--;
+  } else {
+    if (dp[rows - 1][cols] < dp[rows][cols - 1]) {
+      // Move up
+      rows--;
+    } else {
+      cols--; // Move left (or handle ties by choosing either)
+    }
+  }
+
+  path.push([rows, cols]);
+}
+
+// 3. since we trace backward, from destination to start.
+
+Path.reverse(); // give the unique path.
+```
