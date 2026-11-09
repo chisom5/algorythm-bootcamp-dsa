@@ -172,3 +172,50 @@ function uniquePaths(m, n) {
 ```
 
 The code first allocates independent rows, then fills the top and left boundaries. Then The nested loops compute the remaining cells in row-major order. This run in Time & Space - O(m \* n)
+
+- Minimum Path cost
+
+To Find a path from the top-left cell to the bottom-right cell with the smallest sum, still moving only right or down. Include the costs of both the start and the destination.
+
+The question has changed from counting all valid paths to optimizing, meaning choosing the best value among valid paths.
+
+Here we keep the state, but changes what it measures. dp[r][c] is the minimum total cost of a path from (0,0) to (r,c), including grid[r][c].
+
+i.e dp[r][c] = grid[r][c] + min(dp[r-1][c], dp[r][c-1])
+
+- Similarity between Minimum Path Sum and Unique Path
+
+| Unique Path                    | Minimum Path Sum                                   |
+| ------------------------------ | -------------------------------------------------- |
+| Number of path are stored      | Smallest total cost are stored                     |
+| Add both counts                | Take the smallest cost                             |
+| -------                        | The input cell's cost is added (current cell cost) |
+| The neighbours are up and left | The neighbours are up and left                     |
+
+```js
+function miniumPathSum(grid) {
+  const m = grid.length;
+  const n = grid[0].length;
+
+  let dp = Array.from({ length: m }, () => Array(n).fill(0));
+
+  dp[0][0] = grid[0][0];
+
+  for (let r = 1; r < m; r++) {
+    dp[r][0] = dp[r - 1][0] + grid[r][0];
+  }
+  for (let c = 1; c < n; c++) {
+    dp[0][c] = dp[0][c - 1] + grid[0][c];
+  }
+
+  for (let r = 1; r < m; r++) {
+    for (let c = 1; c < n; c++) {
+        dp[r][c] = grid[r][c] + Math.min(dp[r - 1][c], dp[r][ c -1])
+    }
+  }
+
+  return dp[m - 1][n - 1];
+}
+```
+
+The input grid remains unchanged. Create a separate DP table to stores the minimum cost to reach each cell. then we initialize the start, top row, and first column before the interior loops begin.
