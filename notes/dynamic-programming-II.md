@@ -192,6 +192,7 @@ i.e dp[r][c] = grid[r][c] + min(dp[r-1][c], dp[r][c-1])
 | -------                        | The input cell's cost is added (current cell cost) |
 | The neighbours are up and left | The neighbours are up and left                     |
 
+
 ```js
 function miniumPathSum(grid) {
   const m = grid.length;
