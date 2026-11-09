@@ -149,3 +149,26 @@ To reach an interior cell (r,c), the last move came from (r−1,c) or from (r,c�
 paths(r,c) = paths(r−1,c) + paths(r,c−1)
 
 A recursive solution ask those two smaller questions. Different call branches can ask for the same cell, so a memoized version stores the answer under the pair (r,c). While Tabulation computes each cell once in an appropriate order. keeping the same subproblem meaning as the recursive version.
+
+- Unique Path
+
+```js
+function uniquePaths(m, n) {
+  const dp = Array.from({ length: m }, () => Array(n).fill(0));
+
+  for (let c = 0; c < n; c++) {
+    dp[0][c] = 1;
+  }
+  for (let r = 0; r < m; r++) {
+    dp[r][0] = 1;
+  }
+  for (let r = 1; r < m; r++) {
+    for (let c = 1; c < n; c++) {
+      dp[r][c] = dp[r - 1][c] + dp[r][c - 1];
+    }
+  }
+  return dp[m - 1][n - 1];
+}
+```
+
+The code first allocates independent rows, then fills the top and left boundaries. Then The nested loops compute the remaining cells in row-major order. This run in Time & Space - O(m \* n)
