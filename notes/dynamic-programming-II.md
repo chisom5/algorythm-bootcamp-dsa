@@ -101,7 +101,7 @@ Eg. for House robber space optimization uses two prefix total
 
 ```js
 function rob(nums) {
-  let prev2 = 0; // hold take 
+  let prev2 = 0; // hold take
   let prev1 = 0; // hold skip
   for (const x of nums) {
     const curr = Math.max(prev1, prev2 + x);
@@ -122,12 +122,11 @@ Now we can transfer this method into grid position problems, a subproblem that n
 
 Examples of what we would do here is to count grid paths, minimize a path’s cost, and compare string subsequences. Then we will reduce memory by keeping only the values that later steps still need.
 
-- When state variable is not enough : is If two situations share your proposed state but need different results, the state leaves out information. e.g 
+- When state variable is not enough : is If two situations share your proposed state but need different results, the state leaves out information. e.g
 
 1. a "Grid path" - where is provides both coordinates of a position, then state should account for state(row, col).
 
 2. "Compare two strings" - The information that must be kept is "How much of each string is included" state(i, j).
-
 
 - Reading a 2-Dimensional table.
 
