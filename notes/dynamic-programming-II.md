@@ -150,7 +150,7 @@ paths(r,c) = paths(r−1,c) + paths(r,c−1)
 
 A recursive solution ask those two smaller questions. Different call branches can ask for the same cell, so a memoized version stores the answer under the pair (r,c). While Tabulation computes each cell once in an appropriate order. keeping the same subproblem meaning as the recursive version.
 
-- Unique Path
+#### Unique Path
 
 ```js
 function uniquePaths(m, n) {
@@ -173,7 +173,7 @@ function uniquePaths(m, n) {
 
 The code first allocates independent rows, then fills the top and left boundaries. Then The nested loops compute the remaining cells in row-major order. This run in Time & Space - O(m \* n)
 
-- Minimum Path cost
+#### Minimum Path cost
 
 To Find a path from the top-left cell to the bottom-right cell with the smallest sum, still moving only right or down. Include the costs of both the start and the destination.
 
@@ -191,7 +191,6 @@ i.e dp[r][c] = grid[r][c] + min(dp[r-1][c], dp[r][c-1])
 | Add both counts                | Take the smallest cost                             |
 | -------                        | The input cell's cost is added (current cell cost) |
 | The neighbours are up and left | The neighbours are up and left                     |
-
 
 ```js
 function miniumPathSum(grid) {
@@ -221,7 +220,7 @@ function miniumPathSum(grid) {
 
 The input grid remains unchanged. Create a separate DP table to stores the minimum cost to reach each cell. then we initialize the start, top row, and first column before the interior loops begin.
 
-- Recover The actual path
+#### Recover The actual path From Minimum Path
 
 From the minimum path, we can recover the unique path or route by tracing back. For an interior cell, move to the smaller of the upper and left DP values. On the top row, move left. On the first column, move up. If the two predecessor values tie, either can lead to an optimal path.
 
@@ -256,4 +255,75 @@ while (rows > 0 || cols > 0) {
 // 3. since we trace backward, from destination to start.
 
 Path.reverse(); // give the unique path.
+```
+
+#### Compare Sequences while preserving order (LCS)
+
+A subsequence is formed by keeping some characters in their original order and possibly skipping others. A substring must be contiguous; a subsequence does not need to be.
+
+The longest common subsequence, abbreviated LCS, is the longest sequence that is a subsequence of both inputs. For e.g "abcde" and "ace", the LCS is ace, with length three.
+
+- State:
+  The LCS of two prefixes, dp[i][j] is the LCS length of the first i characters of text1 and the first j characters of text2.
+
+For input lengths m and n, allocate (m+1) × (n+1) entries. The final characters of these prefixes are at indices i−1 and j−1;
+
+- To Determine the recurrence
+
+We compare text[i - 1] and text2[j−1], and when there is a match
+
+1. Match:
+
+Use dp[i][j] = dp[i−1][j−1] + 1. Moving diagonally removes the matched character from both prefixes, so neither occurrence is reused.
+
+2. Mismatch:
+
+Use dp[i][j] = max(dp[i−1][j], dp[i][j−1]). Try removing a final character from either prefix and keep the better length.
+
+- Code Format for LCS, after building the LCS table.
+
+```js
+function longestCommonSubsequence(text1, text2){
+    let m = text1.length, n = text2.length;
+
+    let dp = Array.from({length: m + 1}, ()=> Array(n + 1).fill(0));
+
+    for(let r = 1, r <= m; r ++){
+        for(let c = 1; c <= n; c++){
+            // if there is a match
+            if(text1[r - 1] === text2[c - 1]){
+                dp[r][c] = dp[r - 1][c - 1] + 1;
+            }else{
+                // there is a mismatch
+                dp[r][c] = Math.max(dp[r - 1][c], dp[r][c - 1]);
+            }
+        }
+    }
+
+    return dp[m][n];
+}
+```
+
+#### Recover actual LCS
+
+The steps is to start at (m,n). If the final characters match, collect that character and move diagonally. Otherwise, move toward the larger upper or left value. perform this until prefix is empty.
+
+```js
+function lcsString(text1, text2, dp) {
+  let i = text1.length, j = text2.length;
+  const chars = [];
+  
+  while (i > 0 && j > 0) {
+    if (text1[i - 1] === text2[j - 1]) {
+      chars.push(text1[i - 1]);
+      i--;
+      j--;
+    } else if (dp[i - 1][j] >= dp[i][j - 1]) {
+      i--;
+    } else {
+      j--;
+    }
+  }
+  return chars.slice().reverse().join('');
+}
 ```
