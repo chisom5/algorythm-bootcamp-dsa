@@ -312,7 +312,7 @@ The steps is to start at (m,n). If the final characters match, collect that char
 function lcsString(text1, text2, dp) {
   let i = text1.length, j = text2.length;
   const chars = [];
-  
+
   while (i > 0 && j > 0) {
     if (text1[i - 1] === text2[j - 1]) {
       chars.push(text1[i - 1]);
@@ -327,3 +327,5 @@ function lcsString(text1, text2, dp) {
   return chars.slice().reverse().join('');
 }
 ```
+
+#### Space Optimization in 2D-dp

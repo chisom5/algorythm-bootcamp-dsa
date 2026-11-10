@@ -37,3 +37,14 @@ The constraint that matter most is " 1 <= text1.length, text2.length <= 1000" be
 - Time O(M x N) - where M is the length of the first string and N is the length of the second string. this is for 2D table
 
 - Space O(M x N)
+
+#### Steps
+
+- Create a 2D Dp table, initialize to 0
+
+- Iterate both string, starting from 1 and if the first character of the first string matches the second string first character
+    dp[i][j] = dp[i - 1][j - 1] + 1
+
+    else: dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1])
+
+- Return the length of the lowest common subsequence. as dp[m][n]
