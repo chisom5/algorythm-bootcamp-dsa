@@ -39,12 +39,12 @@ function minPathSum(grid) {
   // initialize first row
   dp[0] = grid[0][0];
 
-  for (let c = 0; c < n; c++) {
+  for (let c = 1; c < n; c++) {
     dp[c] = dp[c - 1] + grid[0][c];
   }
 
   for (let r = 1; r <= m; r++) {
-    //update first col
+    //update first col for the new row.
     dp[0] += grid[r][0];
 
     for (let c = 1; c <= n; c++) {
