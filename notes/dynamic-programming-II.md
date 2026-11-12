@@ -74,7 +74,7 @@ function climbStairs(n) {
 }
 ```
 
-### Space Optimization
+### Space Optimization in 1D-dp
 
 Uses two prefix state variable in-place of tables.
 
@@ -310,7 +310,8 @@ The steps is to start at (m,n). If the final characters match, collect that char
 
 ```js
 function lcsString(text1, text2, dp) {
-  let i = text1.length, j = text2.length;
+  let i = text1.length,
+    j = text2.length;
   const chars = [];
 
   while (i > 0 && j > 0) {
@@ -324,8 +325,87 @@ function lcsString(text1, text2, dp) {
       j--;
     }
   }
-  return chars.slice().reverse().join('');
+  return chars.slice().reverse().join("");
 }
 ```
 
 #### Space Optimization in 2D-dp
+
+To Optimize Space complexity of 2D dp from O(M \* N) to O(N).
+
+Rolling rows means keeping arrays for the previous row and the row currently being computed. After completing the current row, use it as the previous row for the next iteration.
+
+| Full Dp table(2D) | Rolling-row |
+| ----------------- | ----------- |
+| dp[r−1][c]        | prev[c]     |
+| dp[r][c−1]        | curr[c−1]   |
+| dp[r][c]          | curr[c]     |
+
+E.g For Unique Paths, initialize the first row to ones and set the first entry of each new row to one. Allocate a fresh current row before filling it; do not let current-row writes alter the previous row.
+
+```js
+function uniquePath(m, n) {
+  let prev = Array(n).fill(1);
+
+  for (let r = 1; r < m; r++) {
+    let curr = Array(m).fill(1);
+
+    for (let c = 1; c < n; c++) {
+      curr[c] = prev[c] + curr[c - 1];
+    }
+    prev = curr;
+  }
+  return prev[n - 1];
+}
+```
+
+- One array can represent parts of two rows.
+
+To process one array from left to right, before writing column c, dp[c] - holds the old upper values, dp[c - 1] - holds the new left value.
+
+dp[c] = dp[c] + dp[c -1]
+
+```js
+function uniquePath(m, n) {
+  let dp = Array(n).fill(1);
+
+  for (let r = 1; r < m; r++) {
+    for (let c = 1; c < n; c++) {
+      dp[c] += dp[c - 1];
+    }
+  }
+
+  return dp[n - 1];
+}
+```
+
+This gives complexity of Time - O(m \* n) and Space - O(n)
+
+- Minimum Path Sum
+
+```js
+function minimumPathSum(grid) {
+  let m = grid.length,
+    n = grid[0].length;
+
+  let dp = Array(n).fill(0);
+
+  // initialize the first row.
+  dp[0] = grid[0][0];
+
+  for (let c = 1; c < n; c++) {
+    dp[c] = dp[c - 1] + grid[0][c];
+  }
+
+  for (let r = 1; r < m; r++) {
+    // update the first column
+    dp[0] += grid[r][0];
+
+    for (let c = 1; c < n; c++) {
+      dp[c] = grid[r][c] + Math.min(dp[c], dp[c - 1]);
+    }
+  }
+
+  return dp[n - 1]
+}
+```
