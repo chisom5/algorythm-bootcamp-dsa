@@ -406,6 +406,42 @@ function minimumPathSum(grid) {
     }
   }
 
-  return dp[n - 1]
+  return dp[n - 1];
 }
 ```
+
+- Lowest Common Subsequence (LCS)
+
+```js
+function longestCommonSubsequence(text1, text2) {
+  let m = text1.length,
+    n = text2.length;
+
+  let dp = Array(n + 1).fill(0);
+
+  for (let i = 1; i <= m; i++) {
+    let prev_diag = 0;
+
+    for (let j = 1; j <= n; j++) {
+      const saved = dp[j];
+      if (text1[i - 1] === text2[j - 1]) {
+        dp[j] = prev_diag + 1;
+      }else{
+        dp[j] = Math.max(dp[j], dp[j - 1]);
+      }
+    }
+
+    prev_diag = saved;
+  }
+
+  return dp[n];
+}
+```
+
+We preserve the diagonal before each update, using prev_diag for the previous row’s previous-column value. Reset it to zero at the start of each row because the empty-prefix column is always zero.
+
+- Save the old upper value: before changing dp[j], we copy it in "saved"
+
+- Compute the new value : if there's match using "prev_diag + 1" else use the max value.
+
+- Prepare for the next column : prev_diag = saved.
