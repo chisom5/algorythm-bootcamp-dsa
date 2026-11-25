@@ -126,12 +126,13 @@ The DP runs in O(n^2) time and space O(n)
 
 2. Greedy pattern
 
+Forward Greddy
 ```js
 function canJump(nums) {
   let max_Reach = 0;
 
   for (let i = 0; i < nums.length; i++) {
-    if (i >= max_Reach) {
+    if (i > max_Reach) {
       return false;
     }
     max_Reach = Math.max(max_Reach, i + nums[i]);
@@ -141,3 +142,19 @@ function canJump(nums) {
 }
 ```
 Runs in O(n) time and space O(1)
+
+Backward Greedy
+
+```js
+function cnaJump(nums){
+  let goal = nums.length - 1; // index position of the last item
+
+  for(let i = nums.length - 2; i >= 0; i-- ){
+    if(i + nums[i] >= goal){
+      goal = i;
+    }
+  }
+
+  return goal === 0;
+}
+```
