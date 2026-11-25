@@ -25,3 +25,20 @@ For this concert kickoff, venue 3 leaves enough fuel to complete the full circui
 
 No concert kickoff works: the route requires more fuel overall than the venues provide, so the bus cannot complete the circuit.
 
+## Approach Plan
+
+First we check our fuel budget, if total fuel is not enough to handle cost return -1 immediately because no matter where we start collecting fuel from, we won't be able to complete the full circuit. then we initialize tank as empty so at each station we add gas - cost. If tank is negative every start from the current index has fail, hence we start at i + 1 with an empty tank. otherwise we continue.
+
+#### Key Constraint
+
+The constraint that matter most is "i <= n <= 100000" because n can reach 10^5, a brute-force solution that tries starting at every venue start from 0 to n - 1 and simulates up to n steps takes O(n^2) time and it would eventually time out.
+
+#### Pattern
+
+- Greedy Alogrithm
+
+#### Complexity 
+
+- Time O(N)
+
+- Space O(1)
